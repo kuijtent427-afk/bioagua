@@ -232,7 +232,7 @@ const Contacto = () => {
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="phone">Teléfono</Label>
-                          <Input id="phone" type="tel" placeholder="+56 9 ..." />
+                          <Input id="phone" name="phone" type="tel" placeholder="+56 9 ..." />
                         </div>
                       </div>
                       <div className="space-y-2">
