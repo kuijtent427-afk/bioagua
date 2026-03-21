@@ -146,21 +146,6 @@ const Contacto = () => {
               </p>
               <div className="space-y-5">
                 <motion.a
-                  href="https://wa.me/56925835836"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 rounded-xl glass-card hover:border-primary/30 hover:shadow-md transition-all duration-300"
-                  whileHover={{ x: 4, transition: { duration: 0.2 } }}
-                >
-                  <div className="w-12 h-12 rounded-full bg-[#25D366]/10 flex items-center justify-center shrink-0">
-                    <MessageCircle className="h-6 w-6 text-[#25D366]" />
-                  </div>
-                  <div>
-                    <EditableText contentKey="contacto__contact__whatsapp_label" defaultValue="WhatsApp" as="p" className="font-semibold text-sm text-foreground" />
-                    <EditableText contentKey="contacto__contact__whatsapp_number" defaultValue="+56 9 2583 5836" as="p" className="text-sm text-muted-foreground" />
-                  </div>
-                </motion.a>
-                <motion.a
                   href="tel:+56925835616"
                   className="flex items-center gap-4 p-4 rounded-xl glass-card hover:border-primary/30 hover:shadow-md transition-all duration-300"
                   whileHover={{ x: 4, transition: { duration: 0.2 } }}
