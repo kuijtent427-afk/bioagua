@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Droplets, Phone, Mail, MessageCircle } from "lucide-react";
+import { Phone, Mail, MessageCircle } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const Footer = () => (
   <footer className="bg-secondary text-secondary-foreground">
@@ -7,8 +8,7 @@ const Footer = () => (
       <div className="grid md:grid-cols-3 gap-8">
         <div>
           <div className="flex items-center gap-2 mb-4">
-            <Droplets className="h-6 w-6 text-accent" />
-            <span className="font-display text-lg font-bold">BIOAGUA CHILE</span>
+            <img src={logo} alt="BioAgua Chile" className="h-10 w-auto" />
           </div>
           <p className="text-sm text-secondary-foreground/70 leading-relaxed">
             Mantención, optimización e instalación de sistemas de agua para condominios y empresas.
@@ -52,8 +52,7 @@ const Footer = () => (
           © {new Date().getFullYear()} BioAgua Chile. Todos los derechos reservados.
         </p>
         <div className="flex items-center gap-2">
-          <Droplets className="h-5 w-5 text-accent" />
-          <span className="font-display text-sm font-bold text-secondary-foreground/60">BIOAGUA</span>
+          <img src={logo} alt="BioAgua Chile" className="h-8 w-auto" />
         </div>
       </div>
     </div>

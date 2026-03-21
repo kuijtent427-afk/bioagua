@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Droplets } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Menu, X } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const navLinks = [
   { to: "/", label: "INICIO" },
@@ -19,8 +19,7 @@ const Navbar = () => {
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border shadow-sm">
       <div className="container mx-auto flex items-center justify-between h-16 px-4">
         <Link to="/" className="flex items-center gap-2">
-          <Droplets className="h-8 w-8 text-primary" />
-          <span className="font-display text-xl font-bold tracking-tight text-secondary">BIOAGUA</span>
+          <img src={logo} alt="BioAgua Chile" className="h-10 w-auto" />
         </Link>
 
         {/* Desktop */}
