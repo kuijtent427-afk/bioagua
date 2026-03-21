@@ -43,23 +43,23 @@ const slideInRight = {
 };
 
 const problems = [
-  { icon: AlertTriangle, title: "FALLOS CONSTANTES", desc: "en calderas y bombas" },
-  { icon: DollarSign, title: "ALTOS COSTOS", desc: "de reparación y mantenimiento" },
-  { icon: Gauge, title: "EQUIPOS DETERIORADOS", desc: "por sarro y mala calidad del agua" },
-  { icon: Droplets, title: "ALTOS CONSUMOS", desc: "de agua, gas y energía" },
+  { key: "faults", icon: AlertTriangle, title: "FALLOS CONSTANTES", desc: "en calderas y bombas" },
+  { key: "costs", icon: DollarSign, title: "ALTOS COSTOS", desc: "de reparación y mantenimiento" },
+  { key: "deterioration", icon: Gauge, title: "EQUIPOS DETERIORADOS", desc: "por sarro y mala calidad del agua" },
+  { key: "consumption", icon: Droplets, title: "ALTOS CONSUMOS", desc: "de agua, gas y energía" },
 ];
 
 const solutions = [
-  { icon: Wrench, title: "Mantenciones Correctivas y Preventivas" },
-  { icon: Zap, title: "Instalación de calderas y dispositivos que optimizan tu sistema." },
-  { icon: Leaf, title: "Soluciones sustentables para ahorrar agua, energía y costos." },
+  { key: "maintenance", icon: Wrench, title: "Mantenciones Correctivas y Preventivas" },
+  { key: "installation", icon: Zap, title: "Instalación de calderas y dispositivos que optimizan tu sistema." },
+  { key: "sustainability", icon: Leaf, title: "Soluciones sustentables para ahorrar agua, energía y costos." },
 ];
 
 const useCases = [
-  { icon: Building, title: "CONDOMINIOS Y COMUNIDADES", desc: "Mantención preventiva de calderas, bombas hidroneumáticas y sistemas de agua caliente para edificios residenciales." },
-  { icon: Wrench, title: "EMPRESAS E INDUSTRIAS", desc: "Instalación y optimización de sistemas hidráulicos, ionizadores y equipos de tratamiento de agua para operaciones industriales." },
-  { icon: Droplets, title: "HOTELES Y CLÍNICAS", desc: "Soluciones integrales de agua caliente sanitaria, recirculación y eficiencia energética para alto consumo." },
-  { icon: Zap, title: "EFICIENCIA ENERGÉTICA", desc: "Diagnóstico y mejora del rendimiento de calderas y sistemas térmicos para reducir costos operativos." },
+  { key: "condominios", icon: Building, title: "CONDOMINIOS Y COMUNIDADES", desc: "Mantención preventiva de calderas, bombas hidroneumáticas y sistemas de agua caliente para edificios residenciales." },
+  { key: "empresas", icon: Wrench, title: "EMPRESAS E INDUSTRIAS", desc: "Instalación y optimización de sistemas hidráulicos, ionizadores y equipos de tratamiento de agua para operaciones industriales." },
+  { key: "hoteles", icon: Droplets, title: "HOTELES Y CLÍNICAS", desc: "Soluciones integrales de agua caliente sanitaria, recirculación y eficiencia energética para alto consumo." },
+  { key: "eficiencia", icon: Zap, title: "EFICIENCIA ENERGÉTICA", desc: "Diagnóstico y mejora del rendimiento de calderas y sistemas térmicos para reducir costos operativos." },
 ];
 
 const Index = () => {
