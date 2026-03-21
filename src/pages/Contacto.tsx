@@ -246,9 +246,9 @@ const Contacto = () => {
                         <Label htmlFor="message">Mensaje <span className="text-destructive">*</span></Label>
                         <Textarea id="message" name="message" placeholder="Cuéntanos tu situación..." rows={4} required />
                       </div>
-                      <Button type="submit" size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold text-base hover:scale-[1.02] transition-transform">
+                      <Button type="submit" size="lg" disabled={submitting} className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold text-base hover:scale-[1.02] transition-transform">
                         <Send className="h-4 w-4 mr-2" />
-                        Enviar Solicitud
+                        {submitting ? "Enviando..." : "Enviar Solicitud"}
                       </Button>
                     </form>
                   </CardContent>
