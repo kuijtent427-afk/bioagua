@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -33,9 +34,27 @@ const scaleIn = {
 const Contacto = () => {
   const { toast } = useToast();
   const [submitted, setSubmitted] = useState(false);
+  const [clientType, setClientType] = useState("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const { error } = await supabase.from("contact_messages").insert({
+      name: formData.get("name") as string,
+      email: formData.get("email") as string,
+      phone: (formData.get("phone") as string) || null,
+      client_type: clientType || null,
+      subject: (formData.get("subject") as string) || null,
+      message: formData.get("message") as string,
+    });
+
+    if (error) {
+      toast({ title: "Error al enviar", description: "Intenta nuevamente.", variant: "destructive" });
+      return;
+    }
+
     setSubmitted(true);
     toast({ title: "¡Solicitud enviada!", description: "Nos pondremos en contacto contigo en menos de 24 horas." });
   };
@@ -193,11 +212,11 @@ const Contacto = () => {
                       <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-2">
                           <Label htmlFor="name" className="text-sm font-medium">Nombre <span className="text-destructive">*</span></Label>
-                          <Input id="name" placeholder="Tu nombre" required />
+                          <Input id="name" name="name" placeholder="Tu nombre" required />
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="clientType" className="text-sm font-medium">Tipo de cliente</Label>
-                          <Select required>
+                          <Select required name="clientType" onValueChange={(v) => setClientType(v)}>
                             <SelectTrigger id="clientType"><SelectValue placeholder="Seleccionar" /></SelectTrigger>
                             <SelectContent>
                               <SelectItem value="empresa">Empresa</SelectItem>
@@ -209,20 +228,20 @@ const Contacto = () => {
                       <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-2">
                           <Label htmlFor="email">Email <span className="text-destructive">*</span></Label>
-                          <Input id="email" type="email" placeholder="correo@ejemplo.cl" required />
+                          <Input id="email" name="email" type="email" placeholder="correo@ejemplo.cl" required />
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="phone">Teléfono</Label>
-                          <Input id="phone" type="tel" placeholder="+56 9 ..." />
+                          <Input id="phone" name="phone" type="tel" placeholder="+56 9 ..." />
                         </div>
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="subject">Asunto</Label>
-                        <Input id="subject" placeholder="¿Sobre qué necesitas ayuda?" />
+                        <Input id="subject" name="subject" placeholder="¿Sobre qué necesitas ayuda?" />
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="message">Mensaje <span className="text-destructive">*</span></Label>
-                        <Textarea id="message" placeholder="Cuéntanos tu situación..." rows={4} required />
+                        <Textarea id="message" name="message" placeholder="Cuéntanos tu situación..." rows={4} required />
                       </div>
                       <Button type="submit" size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold text-base hover:scale-[1.02] transition-transform">
                         <Send className="h-4 w-4 mr-2" />
