@@ -14,7 +14,6 @@ const AnimatedCounter = ({ value, suffix = "" }: AnimatedCounterProps) => {
   useEffect(() => {
     if (!isInView) return;
 
-    // Try to parse numeric part
     const numMatch = value.match(/^(\d+)/);
     if (!numMatch) {
       setDisplay(value);
@@ -22,14 +21,13 @@ const AnimatedCounter = ({ value, suffix = "" }: AnimatedCounterProps) => {
     }
 
     const target = parseInt(numMatch[1], 10);
-    const rest = value.slice(numMatch[1].length); // e.g. "/7" or "+"
+    const rest = value.slice(numMatch[1].length);
     const duration = 1200;
     const start = Date.now();
 
     const tick = () => {
       const elapsed = Date.now() - start;
       const progress = Math.min(elapsed / duration, 1);
-      // ease out cubic
       const eased = 1 - Math.pow(1 - progress, 3);
       const current = Math.round(eased * target);
       setDisplay(`${current}${rest}`);
@@ -42,7 +40,7 @@ const AnimatedCounter = ({ value, suffix = "" }: AnimatedCounterProps) => {
   return (
     <motion.span
       ref={ref}
-      className="font-display text-4xl md:text-5xl font-bold text-primary"
+      className="font-display text-4xl md:text-5xl font-bold text-gradient"
       initial={{ opacity: 0, scale: 0.5 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
