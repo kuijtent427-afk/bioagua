@@ -23,6 +23,13 @@ const scaleIn = {
   }),
 };
 
+const trustBadges = [
+  { key: "response", icon: Clock, label: "Respuesta en menos de 24h" },
+  { key: "nocommit", icon: Shield, label: "Sin compromiso" },
+  { key: "whatsapp", icon: MessageCircle, label: "Atención por WhatsApp" },
+  { key: "free", icon: CheckCircle, label: "Evaluación gratuita" },
+];
+
 const Contacto = () => {
   const { toast } = useToast();
   const [submitted, setSubmitted] = useState(false);
@@ -79,14 +86,9 @@ const Contacto = () => {
       <section className="bg-background py-12 md:py-16">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-            {[
-              { icon: Clock, label: "Respuesta en menos de 24h" },
-              { icon: Shield, label: "Sin compromiso" },
-              { icon: MessageCircle, label: "Atención por WhatsApp" },
-              { icon: CheckCircle, label: "Evaluación gratuita" },
-            ].map((item, i) => (
+            {trustBadges.map((item, i) => (
               <motion.div
-                key={item.label}
+                key={item.key}
                 custom={i}
                 initial="hidden"
                 whileInView="visible"
@@ -100,7 +102,7 @@ const Contacto = () => {
                 >
                   <item.icon className="h-6 w-6 text-primary" />
                 </motion.div>
-                <p className="text-xs font-semibold text-foreground tracking-wide">{item.label}</p>
+                <EditableText contentKey={`contacto__trust__${item.key}`} defaultValue={item.label} as="p" className="text-xs font-semibold text-foreground tracking-wide" />
               </motion.div>
             ))}
           </div>
@@ -142,8 +144,8 @@ const Contacto = () => {
                     <MessageCircle className="h-6 w-6 text-[#25D366]" />
                   </div>
                   <div>
-                    <p className="font-semibold text-sm text-foreground">WhatsApp</p>
-                    <p className="text-sm text-muted-foreground">+56 9 2583 5836</p>
+                    <EditableText contentKey="contacto__contact__whatsapp_label" defaultValue="WhatsApp" as="p" className="font-semibold text-sm text-foreground" />
+                    <EditableText contentKey="contacto__contact__whatsapp_number" defaultValue="+56 9 2583 5836" as="p" className="text-sm text-muted-foreground" />
                   </div>
                 </motion.a>
                 <motion.a
@@ -155,8 +157,8 @@ const Contacto = () => {
                     <Phone className="h-6 w-6 text-primary" />
                   </div>
                   <div>
-                    <p className="font-semibold text-sm text-foreground">Teléfono</p>
-                    <p className="text-sm text-muted-foreground">+56 9 2583 5616</p>
+                    <EditableText contentKey="contacto__contact__phone_label" defaultValue="Teléfono" as="p" className="font-semibold text-sm text-foreground" />
+                    <EditableText contentKey="contacto__contact__phone_number" defaultValue="+56 9 2583 5616" as="p" className="text-sm text-muted-foreground" />
                   </div>
                 </motion.a>
                 <motion.a
@@ -168,8 +170,8 @@ const Contacto = () => {
                     <Mail className="h-6 w-6 text-accent" />
                   </div>
                   <div>
-                    <p className="font-semibold text-sm text-foreground">Email</p>
-                    <p className="text-sm text-muted-foreground">bioagua@gmail.com</p>
+                    <EditableText contentKey="contacto__contact__email_label" defaultValue="Email" as="p" className="font-semibold text-sm text-foreground" />
+                    <EditableText contentKey="contacto__contact__email_address" defaultValue="bioagua@gmail.com" as="p" className="text-sm text-muted-foreground" />
                   </div>
                 </motion.a>
               </div>

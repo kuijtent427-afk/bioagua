@@ -29,14 +29,15 @@ const slideInRight = {
 };
 
 const problems = [
-  { icon: AlertTriangle, title: "EMERGENCIAS", desc: "Por fugas y fallas en sistemas de agua" },
-  { icon: DollarSign, title: "GASTO INNECESARIO", desc: "Por reparaciones recurrentes." },
-  { icon: Droplets, title: "INCRUSTACIONES", desc: "Que deterioran tus equipos." },
+  { key: "emergencies", icon: AlertTriangle, title: "EMERGENCIAS", desc: "Por fugas y fallas en sistemas de agua" },
+  { key: "expenses", icon: DollarSign, title: "GASTO INNECESARIO", desc: "Por reparaciones recurrentes." },
+  { key: "scale", icon: Droplets, title: "INCRUSTACIONES", desc: "Que deterioran tus equipos." },
 ];
 
-const cases = [
-  { name: "Condominio Central Park", icon: Building, stat: "AHORRO DEL 20% EN CONSUMO DE GAS", desc: "Tras nuestras mantenciones" },
-  { name: "Residencial El Bosque", icon: Building, stat: "RESOLUCIÓN DE EMERGENCIAS EN MENOS DE 2 HORAS", desc: "Con nuestro soporte 24/7" },
+const solutionItems = [
+  { key: "repair", title: "MANTENEMOS Y REPARAMOS", desc: "Calderas y bombas para prevenir emergencias" },
+  { key: "install", title: "INSTALAMOS", desc: "Dispositivos que mejoran la calidad del agua y reducen costos." },
+  { key: "support", title: "SOPORTE CONTINUO", desc: "Atención 24/7" },
 ];
 
 const Condominios = () => {
@@ -110,12 +111,12 @@ const Condominios = () => {
           </motion.div>
           <motion.div className="grid md:grid-cols-3 gap-10 max-w-3xl mx-auto" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
             {problems.map((p, i) => (
-              <motion.div key={p.title} custom={i} variants={scaleIn} whileHover={{ y: -8 }} className="text-center cursor-default">
+              <motion.div key={p.key} custom={i} variants={scaleIn} whileHover={{ y: -8 }} className="text-center cursor-default">
                 <motion.div className="w-20 h-20 rounded-full border-2 border-primary/20 flex items-center justify-center mx-auto mb-4 bg-light-bg" whileHover={{ scale: 1.1 }}>
                   <p.icon className="h-8 w-8 text-primary" />
                 </motion.div>
-                <h3 className="font-display font-bold text-sm text-foreground mb-1 tracking-wide">{p.title}</h3>
-                <p className="text-xs text-muted-foreground">{p.desc}</p>
+                <EditableText contentKey={`condominios__problems__${p.key}_title`} defaultValue={p.title} as="h3" className="font-display font-bold text-sm text-foreground mb-1 tracking-wide" />
+                <EditableText contentKey={`condominios__problems__${p.key}_desc`} defaultValue={p.desc} as="p" className="text-xs text-muted-foreground" />
               </motion.div>
             ))}
           </motion.div>
@@ -132,19 +133,15 @@ const Condominios = () => {
         <div className="container mx-auto px-4 py-24 md:py-28 relative z-10">
           <div className="grid md:grid-cols-2 gap-12 items-center max-w-4xl mx-auto">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={slideInLeft}>
-              <p className="text-primary-foreground/60 text-xs tracking-widest uppercase font-semibold mb-2">Nuestras Soluciones</p>
-              <h3 className="font-display text-2xl font-bold text-primary-foreground mb-6">¿QUÉ HACEMOS POR TU COMUNIDAD?</h3>
+              <EditableText contentKey="condominios__solutions__subtitle" defaultValue="Nuestras Soluciones" as="p" className="text-primary-foreground/60 text-xs tracking-widest uppercase font-semibold mb-2" />
+              <EditableText contentKey="condominios__solutions__title" defaultValue="¿QUÉ HACEMOS POR TU COMUNIDAD?" as="h3" className="font-display text-2xl font-bold text-primary-foreground mb-6" />
               <div className="space-y-4">
-                {[
-                  { title: "MANTENEMOS Y REPARAMOS", desc: "Calderas y bombas para prevenir emergencias" },
-                  { title: "INSTALAMOS", desc: "Dispositivos que mejoran la calidad del agua y reducen costos." },
-                  { title: "SOPORTE CONTINUO", desc: "Atención 24/7" },
-                ].map((item) => (
-                  <motion.div key={item.title} className="flex items-start gap-3 bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/20 rounded-xl p-4 hover:bg-primary-foreground/15 transition-colors duration-300" whileHover={{ x: 6 }}>
+                {solutionItems.map((item) => (
+                  <motion.div key={item.key} className="flex items-start gap-3 bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/20 rounded-xl p-4 hover:bg-primary-foreground/15 transition-colors duration-300" whileHover={{ x: 6 }}>
                     <CheckCircle className="h-5 w-5 text-primary-foreground/80 mt-0.5 shrink-0" />
                     <div>
-                      <p className="font-semibold text-sm text-primary-foreground">{item.title}</p>
-                      <p className="text-xs text-primary-foreground/70">{item.desc}</p>
+                      <EditableText contentKey={`condominios__solutions__${item.key}_title`} defaultValue={item.title} as="p" className="font-semibold text-sm text-primary-foreground" />
+                      <EditableText contentKey={`condominios__solutions__${item.key}_desc`} defaultValue={item.desc} as="p" className="text-xs text-primary-foreground/70" />
                     </div>
                   </motion.div>
                 ))}
@@ -159,31 +156,6 @@ const Condominios = () => {
           <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-8 md:h-14" preserveAspectRatio="none">
             <path d="M0 30C360 0 720 60 1080 30C1260 10 1440 30 1440 30V60H0V30Z" className="fill-background" />
           </svg>
-        </div>
-      </section>
-
-      {/* Cases of Success */}
-      <section className="bg-light-bg py-20 md:py-28 overflow-hidden">
-        <div className="container mx-auto px-4 text-center">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-            <EditableText contentKey="condominios__cases__title" defaultValue="CASOS DE ÉXITO" as="h2" className="font-display text-2xl md:text-3xl font-bold text-foreground mb-14 tracking-wide" />
-          </motion.div>
-          <div className="relative max-w-4xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-10">
-              {cases.map((c, i) => (
-                <motion.div key={c.name} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={i === 0 ? slideInLeft : slideInRight} whileHover={{ y: -6 }} className="cursor-default">
-                  <div className="text-center p-6 rounded-xl glass-card hover:border-primary/30 hover:shadow-lg transition-all duration-300">
-                    <p className="text-primary font-semibold text-sm mb-4">{c.name}</p>
-                    <motion.div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4" whileHover={{ scale: 1.15 }}>
-                      <c.icon className="h-7 w-7 text-primary" />
-                    </motion.div>
-                    <h3 className="font-display font-bold text-foreground text-sm md:text-base mb-2 tracking-wide">{c.stat}</h3>
-                    <p className="text-xs text-muted-foreground">{c.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 
