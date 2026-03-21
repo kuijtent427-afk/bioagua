@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { AlertTriangle, DollarSign, Droplets, Gauge, Wrench, Zap, Leaf, Shield, Clock, Users, Building, ChevronLeft, ChevronRight } from "lucide-react";
+import { AlertTriangle, DollarSign, Droplets, Gauge, Wrench, Zap, Leaf, Building, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
-import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import WaveDivider from "@/components/WaveDivider";
 import CTABanner from "@/components/CTABanner";
+import heroImage from "@/assets/hero-water.png";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -22,9 +21,9 @@ const problems = [
 ];
 
 const solutions = [
-  { icon: Wrench, title: "Mantenciones Correctivas y Preventivas", desc: "Planes programados para evitar fallas y reducir costos." },
-  { icon: Zap, title: "Instalación de calderas y dispositivos que optimizan tu sistema", desc: "Tecnología para maximizar eficiencia energética." },
-  { icon: Leaf, title: "Soluciones sustentables para ahorrar agua, energía y costos", desc: "Ionizadores y sistemas ecológicos de alta eficiencia." },
+  { icon: Wrench, title: "Mantenciones Correctivas y Preventivas" },
+  { icon: Zap, title: "Instalación de calderas y dispositivos que optimizan tu sistema." },
+  { icon: Leaf, title: "Soluciones sustentables para ahorrar agua, energía y costos." },
 ];
 
 const cases = [
@@ -33,44 +32,36 @@ const cases = [
 ];
 
 const Index = () => {
-  const [caseIndex, setCaseIndex] = useState(0);
-
   return (
     <>
       <Navbar />
 
-      {/* Hero — gradient teal/blue with water theme */}
-      <section className="relative overflow-hidden" style={{ background: "linear-gradient(135deg, hsl(195, 60%, 25%) 0%, hsl(190, 50%, 35%) 40%, hsl(185, 55%, 50%) 100%)" }}>
-        <div className="container mx-auto px-4 py-16 md:py-24 relative z-10">
+      {/* Hero */}
+      <section className="relative overflow-hidden bg-light-bg">
+        <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, hsl(195, 50%, 88%) 0%, hsl(195, 40%, 92%) 100%)" }} />
+        <div className="container mx-auto px-4 py-16 md:py-20 relative z-10">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-              <p className="text-primary-foreground/70 text-sm tracking-widest mb-3 uppercase">
+              <p className="text-muted-foreground text-xs tracking-widest mb-3 uppercase">
                 Tu solución para agua limpia y sistemas eficientes
               </p>
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground leading-tight mb-4">
-                BIOAGUA <span className="font-light">CHILE</span>
+              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-secondary leading-tight mb-4">
+                BIOAGUA <span className="font-light text-foreground">CHILE</span>
               </h1>
-              <p className="text-primary-foreground/80 mb-8 max-w-lg text-lg">
+              <p className="text-muted-foreground mb-8 max-w-lg">
                 Desde mantenciones hasta instalaciones, optimizamos tus sistemas para que ahorres tiempo, dinero y recursos.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
-                <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold px-6">
+                <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold px-6 rounded-md">
                   <Link to="/contacto">Contáctanos Hoy</Link>
                 </Button>
-                <Button asChild className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold px-6">
+                <Button asChild className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold px-6 rounded-md">
                   <Link to="/contacto">Solicita una Cotización</Link>
                 </Button>
               </div>
             </motion.div>
-            <div className="hidden md:flex justify-center">
-              <div className="relative">
-                <Droplets className="h-48 w-48 text-primary-foreground/20" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-32 h-32 rounded-full bg-primary-foreground/10 backdrop-blur-sm flex items-center justify-center">
-                    <Droplets className="h-16 w-16 text-primary-foreground/60" />
-                  </div>
-                </div>
-              </div>
+            <div className="hidden md:flex justify-end">
+              <img src={heroImage} alt="Ionizador BioAgua con agua" className="max-w-md w-full object-contain" />
             </div>
           </div>
         </div>
@@ -83,16 +74,16 @@ const Index = () => {
       </section>
 
       {/* Problems */}
-      <section className="bg-background py-16 md:py-24">
+      <section className="bg-background py-20 md:py-28">
         <div className="container mx-auto px-4">
-          <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground text-center mb-12 tracking-wide">
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground text-center mb-16 tracking-wide">
             ¿TE ENFRENTAS A ESTOS PROBLEMAS?
           </h2>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-10">
             {problems.map((p, i) => (
               <motion.div key={p.title} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center">
-                <div className="w-16 h-16 rounded-full border-2 border-primary/30 flex items-center justify-center mx-auto mb-4">
-                  <p.icon className="h-7 w-7 text-primary" />
+                <div className="w-20 h-20 rounded-full border-2 border-primary/20 flex items-center justify-center mx-auto mb-4 bg-light-bg">
+                  <p.icon className="h-8 w-8 text-primary" />
                 </div>
                 <h3 className="font-display font-bold text-sm text-foreground mb-1 tracking-wide">{p.title}</h3>
                 <p className="text-xs text-muted-foreground">{p.desc}</p>
@@ -105,22 +96,22 @@ const Index = () => {
       {/* Solutions — teal gradient band */}
       <section className="relative" style={{ background: "linear-gradient(135deg, hsl(195, 60%, 25%) 0%, hsl(190, 50%, 35%) 50%, hsl(185, 55%, 50%) 100%)" }}>
         <div className="absolute top-0 left-0 right-0">
-          <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-8 md:h-12" preserveAspectRatio="none">
+          <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-8 md:h-14" preserveAspectRatio="none">
             <path d="M0 30C360 60 720 0 1080 30C1260 50 1440 30 1440 30V0H0V30Z" className="fill-background" />
           </svg>
         </div>
-        <div className="container mx-auto px-4 py-20 md:py-24 text-center relative z-10">
-          <p className="text-primary-foreground/70 text-sm tracking-widest mb-2 uppercase">En BioAgua Chile</p>
+        <div className="container mx-auto px-4 py-24 md:py-28 text-center relative z-10">
+          <p className="text-primary-foreground/60 text-xs tracking-widest mb-2 uppercase">En BioAgua Chile</p>
           <h2 className="font-display text-2xl md:text-3xl font-bold text-primary-foreground mb-3 tracking-wide">
             RESOLVEMOS TODO POR TI
           </h2>
-          <p className="text-primary-foreground/70 mb-10">Llámanos ahora para una inspección gratuita.</p>
+          <p className="text-primary-foreground/60 mb-12 text-sm">Llámanos ahora para una inspección gratuita.</p>
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {solutions.map((s, i) => (
               <motion.div key={s.title} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-                <Card className="h-full bg-primary-foreground/10 border border-primary-foreground/20 backdrop-blur-sm">
-                  <CardContent className="p-6 text-center">
-                    <s.icon className="h-8 w-8 text-primary-foreground/80 mx-auto mb-4" />
+                <Card className="h-full bg-primary-foreground/10 border border-primary-foreground/20 backdrop-blur-sm rounded-xl">
+                  <CardContent className="p-6 text-center flex flex-col items-center gap-4">
+                    <s.icon className="h-8 w-8 text-primary-foreground/70" />
                     <p className="text-sm text-primary-foreground font-medium leading-relaxed">{s.title}</p>
                   </CardContent>
                 </Card>
@@ -129,19 +120,19 @@ const Index = () => {
           </div>
         </div>
         <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-8 md:h-12" preserveAspectRatio="none">
+          <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-8 md:h-14" preserveAspectRatio="none">
             <path d="M0 30C360 0 720 60 1080 30C1260 10 1440 30 1440 30V60H0V30Z" className="fill-background" />
           </svg>
         </div>
       </section>
 
       {/* Why Choose Us */}
-      <section className="bg-background py-16 md:py-24">
+      <section className="bg-background py-20 md:py-28">
         <div className="container mx-auto px-4 text-center">
           <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-3 tracking-wide">
             ¿POR QUÉ ELEGIRNOS?
           </h2>
-          <p className="text-muted-foreground mb-12 max-w-xl mx-auto text-sm">
+          <p className="text-muted-foreground mb-14 max-w-xl mx-auto text-sm">
             Contamos con un equipo técnico experto en calderas, bombas y sistemas hidráulicos.
           </p>
           <div className="grid grid-cols-3 gap-8 max-w-3xl mx-auto">
@@ -150,7 +141,7 @@ const Index = () => {
               { value: "5/7", label: "Atención Continua" },
               { value: "11+", label: "Comunidades y Empresas\nconfían en Nosotros" },
             ].map((stat, i) => (
-              <motion.div key={stat.label} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="flex flex-col items-center">
+              <motion.div key={stat.label} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="flex flex-col items-center border-r last:border-r-0 border-border">
                 <span className="font-display text-4xl md:text-5xl font-bold text-primary">{stat.value}</span>
                 <span className="text-xs text-muted-foreground mt-2 whitespace-pre-line">{stat.label}</span>
               </motion.div>
@@ -160,18 +151,18 @@ const Index = () => {
       </section>
 
       {/* Cases of Success */}
-      <section className="bg-light-bg py-16 md:py-24">
+      <section className="bg-light-bg py-20 md:py-28">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-12 tracking-wide">
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-14 tracking-wide">
             CASOS DE ÉXITO
           </h2>
           <div className="relative max-w-4xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 gap-10">
               {cases.map((c, i) => (
                 <motion.div key={c.name} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
                   <div className="text-center">
-                    <p className="text-primary font-semibold text-sm mb-3">{c.name}</p>
-                    <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                    <p className="text-primary font-semibold text-sm mb-4">{c.name}</p>
+                    <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                       <c.icon className="h-7 w-7 text-primary" />
                     </div>
                     <h3 className="font-display font-bold text-foreground text-sm md:text-base mb-2 tracking-wide">{c.stat}</h3>
@@ -180,7 +171,6 @@ const Index = () => {
                 </motion.div>
               ))}
             </div>
-            {/* Navigation arrows */}
             <button className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-10 h-10 rounded-full border border-border bg-background flex items-center justify-center hover:bg-muted transition-colors">
               <ChevronLeft className="h-5 w-5 text-muted-foreground" />
             </button>
