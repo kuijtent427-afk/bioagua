@@ -7,7 +7,7 @@ import { useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTABanner from "@/components/CTABanner";
-import ClientLogos from "@/components/ClientLogos";
+
 import Testimonials from "@/components/Testimonials";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import EditableText from "@/components/admin/EditableText";
