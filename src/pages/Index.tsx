@@ -91,8 +91,8 @@ const Index = () => {
         style={{ background: "linear-gradient(135deg, hsl(195, 60%, 88%) 0%, hsl(190, 55%, 78%) 30%, hsl(185, 50%, 68%) 60%, hsl(180, 45%, 62%) 100%)" }}
       >
         {/* Hero image behind content */}
-        <div className="absolute inset-0 flex items-center justify-end pointer-events-none">
-          <img src={heroImage} alt="" aria-hidden="true" className="h-auto w-auto max-h-full" />
+        <div className="absolute inset-0 flex items-center justify-end pointer-events-none overflow-hidden">
+          <img src={heroImage} alt="" aria-hidden="true" style={{ transform: "scale(1.5)" }} className="h-auto w-auto max-h-full origin-center" />
         </div>
 
         {/* Animated floating shapes */}
