@@ -63,7 +63,7 @@ const Contacto = () => {
   };
 
   return (
-    <>
+    <div className={isEditMode ? "pt-14" : ""}>
       <Navbar />
 
       {/* Hero */}
