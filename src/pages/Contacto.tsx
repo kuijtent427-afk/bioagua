@@ -211,7 +211,7 @@ const Contacto = () => {
                       <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-2">
                           <Label htmlFor="name" className="text-sm font-medium">Nombre <span className="text-destructive">*</span></Label>
-                          <Input id="name" placeholder="Tu nombre" required />
+                          <Input id="name" name="name" placeholder="Tu nombre" required />
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="clientType" className="text-sm font-medium">Tipo de cliente</Label>
