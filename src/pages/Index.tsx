@@ -204,13 +204,13 @@ const Index = () => {
           </motion.div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
             {useCases.map((uc, i) => (
-              <motion.div key={uc.title} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} whileHover={{ y: -6 }} className="cursor-default">
+              <motion.div key={uc.key} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} whileHover={{ y: -6 }} className="cursor-default">
                 <div className="text-center p-6 rounded-xl glass-card hover:border-primary/30 hover:shadow-lg transition-all duration-300 h-full">
                   <motion.div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4" whileHover={{ scale: 1.15 }}>
                     <uc.icon className="h-7 w-7 text-primary" />
                   </motion.div>
-                  <h3 className="font-display font-bold text-foreground text-sm md:text-base mb-2 tracking-wide">{uc.title}</h3>
-                  <p className="text-xs text-muted-foreground leading-relaxed">{uc.desc}</p>
+                  <EditableText contentKey={`index__usecases__${uc.key}_title`} defaultValue={uc.title} as="h3" className="font-display font-bold text-foreground text-sm md:text-base mb-2 tracking-wide" />
+                  <EditableText contentKey={`index__usecases__${uc.key}_desc`} defaultValue={uc.desc} as="p" className="text-xs text-muted-foreground leading-relaxed" multiline />
                 </div>
               </motion.div>
             ))}
