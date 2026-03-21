@@ -55,7 +55,7 @@ const CTABanner = ({
         transition={{ delay: 0.3, duration: 0.6 }}
       >
         <motion.div whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}>
-          <Button asChild variant="outline" className="border-secondary-foreground/40 text-secondary-foreground hover:bg-secondary-foreground/10 font-semibold px-8">
+          <Button asChild variant="outline" className="border-secondary-foreground/40 text-secondary-foreground hover:bg-secondary-foreground/10 font-semibold px-8 bg-transparent">
             <Link to={to}>{buttonText}</Link>
           </Button>
         </motion.div>
