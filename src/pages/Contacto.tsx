@@ -37,6 +37,7 @@ const Contacto = () => {
   const { toast } = useToast();
   const [submitted, setSubmitted] = useState(false);
   const [clientType, setClientType] = useState("");
+  const { isEditMode } = useEditMode();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
