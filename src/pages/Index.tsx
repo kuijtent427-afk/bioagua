@@ -37,7 +37,7 @@ const Index = () => {
       <Navbar />
 
       {/* Hero */}
-      <section className="relative overflow-hidden min-h-[500px] md:min-h-[600px]" style={{ background: "linear-gradient(135deg, hsl(195, 55%, 85%) 0%, hsl(190, 50%, 78%) 50%, hsl(185, 55%, 72%) 100%)" }}>
+      <section className="relative overflow-hidden min-h-[500px] md:min-h-[600px]" style={{ background: "linear-gradient(135deg, hsl(195, 60%, 88%) 0%, hsl(190, 55%, 78%) 30%, hsl(185, 50%, 68%) 60%, hsl(180, 45%, 62%) 100%)" }}>
         
         <div className="container mx-auto px-4 py-20 md:py-28 relative z-10">
           <div className="max-w-xl">
