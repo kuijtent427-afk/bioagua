@@ -55,9 +55,11 @@ const solutions = [
   { icon: Leaf, title: "Soluciones sustentables para ahorrar agua, energía y costos." },
 ];
 
-const cases = [
-  { name: "Comunidad Las Palmas", icon: Building, stat: "REDUCCIÓN DEL 40% EN FALLAS DE CALDERAS", desc: "Gracias a nuestras Mantenciones Preventivas." },
-  { name: "Empresas XYZ", icon: Building, stat: "AHORRO DE $30 MILLONES ANUALES", desc: "En consumo energético tras la instalación de Ionizadores." },
+const useCases = [
+  { icon: Building, title: "CONDOMINIOS Y COMUNIDADES", desc: "Mantención preventiva de calderas, bombas hidroneumáticas y sistemas de agua caliente para edificios residenciales." },
+  { icon: Wrench, title: "EMPRESAS E INDUSTRIAS", desc: "Instalación y optimización de sistemas hidráulicos, ionizadores y equipos de tratamiento de agua para operaciones industriales." },
+  { icon: Droplets, title: "HOTELES Y CLÍNICAS", desc: "Soluciones integrales de agua caliente sanitaria, recirculación y eficiencia energética para alto consumo." },
+  { icon: Zap, title: "EFICIENCIA ENERGÉTICA", desc: "Diagnóstico y mejora del rendimiento de calderas y sistemas térmicos para reducir costos operativos." },
 ];
 
 const Index = () => {
