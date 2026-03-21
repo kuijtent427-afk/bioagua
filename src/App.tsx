@@ -56,7 +56,7 @@ const App = () => (
           <EditModeProvider>
             <AdminToolbar />
             <AnimatedRoutes />
-            <WhatsAppButton />
+            
             <BackToTop />
           </EditModeProvider>
         </BrowserRouter>

@@ -75,15 +75,6 @@ const Footer = () => (
             <motion.a href="mailto:bioagua@gmail.com" className="flex items-center gap-2 hover:text-accent transition-colors" whileHover={{ x: 4, transition: { duration: 0.2 } }}>
               <Mail className="h-4 w-4" /> bioagua@gmail.com
             </motion.a>
-            <motion.a
-              href="https://wa.me/56925835836"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 hover:text-accent transition-colors"
-              whileHover={{ x: 4, transition: { duration: 0.2 } }}
-            >
-              <MessageCircle className="h-4 w-4" /> WhatsApp
-            </motion.a>
           </div>
         </motion.div>
       </motion.div>
