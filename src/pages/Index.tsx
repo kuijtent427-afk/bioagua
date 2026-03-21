@@ -120,12 +120,12 @@ const Index = () => {
           </motion.div>
           <motion.div className="grid grid-cols-2 lg:grid-cols-4 gap-10" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
             {problems.map((p, i) => (
-              <motion.div key={p.title} custom={i} variants={scaleIn} whileHover={{ y: -8 }} className="text-center cursor-default">
+              <motion.div key={p.key} custom={i} variants={scaleIn} whileHover={{ y: -8 }} className="text-center cursor-default">
                 <motion.div className="w-20 h-20 rounded-full border-2 border-primary/20 flex items-center justify-center mx-auto mb-4 bg-light-bg" whileHover={{ scale: 1.1 }}>
                   <p.icon className="h-8 w-8 text-primary" />
                 </motion.div>
-                <h3 className="font-display font-bold text-sm text-foreground mb-1 tracking-wide">{p.title}</h3>
-                <p className="text-xs text-muted-foreground">{p.desc}</p>
+                <EditableText contentKey={`index__problems__${p.key}_title`} defaultValue={p.title} as="h3" className="font-display font-bold text-sm text-foreground mb-1 tracking-wide" />
+                <EditableText contentKey={`index__problems__${p.key}_desc`} defaultValue={p.desc} as="p" className="text-xs text-muted-foreground" />
               </motion.div>
             ))}
           </motion.div>
