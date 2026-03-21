@@ -237,7 +237,7 @@ const Contacto = () => {
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="subject">Asunto</Label>
-                        <Input id="subject" placeholder="¿Sobre qué necesitas ayuda?" />
+                        <Input id="subject" name="subject" placeholder="¿Sobre qué necesitas ayuda?" />
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="message">Mensaje <span className="text-destructive">*</span></Label>
