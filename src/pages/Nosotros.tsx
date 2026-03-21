@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Droplets, CheckCircle } from "lucide-react";
+import { CheckCircle } from "lucide-react";
+import logo from "@/assets/logo.png";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -54,8 +55,7 @@ const Nosotros = () => (
           {/* Logo */}
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={0} className="text-center">
             <div className="flex flex-col items-center gap-3">
-              <Droplets className="h-20 w-20 text-primary" />
-              <span className="font-display text-2xl font-bold text-secondary tracking-wide">BIOAGUA</span>
+              <img src={logo} alt="BioAgua Chile" className="h-28 w-auto" />
             </div>
           </motion.div>
 
