@@ -99,7 +99,7 @@ const Nosotros = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
-            SOMOS BIOAGUA CHILE
+            SOMOS BIOAGUA
           </motion.h1>
           <motion.p
             className="text-primary-foreground/70 text-sm mt-4 max-w-xl mx-auto"

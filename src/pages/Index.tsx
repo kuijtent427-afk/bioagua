@@ -204,7 +204,7 @@ const Index = () => {
             className="text-primary-foreground/60 text-xs tracking-widest mb-2 uppercase"
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={slideInLeft}
           >
-            En BioAgua Chile
+            En BioAgua
           </motion.p>
           <motion.h2
             className="font-display text-2xl md:text-3xl font-bold text-primary-foreground mb-3 tracking-wide"
