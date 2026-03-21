@@ -7,7 +7,7 @@ import { useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTABanner from "@/components/CTABanner";
-import ClientLogos from "@/components/ClientLogos";
+
 import Testimonials from "@/components/Testimonials";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import EditableText from "@/components/admin/EditableText";
@@ -110,10 +110,6 @@ const Index = () => {
           </svg>
         </div>
       </motion.section>
-
-      {/* Client Trust Bar */}
-      <ClientLogos />
-
       {/* Problems */}
       <section className="bg-background py-20 md:py-28">
         <div className="container mx-auto px-4">
