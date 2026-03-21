@@ -1,16 +1,29 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { LogOut, MessageSquare, FileText } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { LogOut, MessageSquare, Edit, ExternalLink } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import AdminMessages from "@/components/admin/AdminMessages";
-import AdminContent from "@/components/admin/AdminContent";
 import logo from "@/assets/logo.png";
 
 const AdminDashboard = () => {
   const { user, isAdmin, loading, signOut } = useAuth();
   const navigate = useNavigate();
+
+  const { data: unreadCount } = useQuery({
+    queryKey: ["unread-count"],
+    queryFn: async () => {
+      const { count } = await supabase
+        .from("contact_messages")
+        .select("*", { count: "exact", head: true })
+        .eq("is_read", false);
+      return count ?? 0;
+    },
+    enabled: !!user && isAdmin,
+  });
 
   if (loading) {
     return (
@@ -48,26 +61,33 @@ const AdminDashboard = () => {
         </div>
       </header>
 
-      {/* Content */}
       <main className="container mx-auto px-4 py-8">
-        <Tabs defaultValue="messages">
-          <TabsList className="mb-6">
-            <TabsTrigger value="messages" className="gap-2">
-              <MessageSquare className="h-4 w-4" /> Mensajes
-            </TabsTrigger>
-            <TabsTrigger value="content" className="gap-2">
-              <FileText className="h-4 w-4" /> Editar Textos
-            </TabsTrigger>
-          </TabsList>
+        {/* Quick action: Edit site */}
+        <Card className="mb-8 border-primary/20 bg-primary/5">
+          <CardContent className="p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                <Edit className="h-6 w-6 text-primary" />
+              </div>
+              <div>
+                <h3 className="font-display font-bold text-foreground text-lg">Editar el Sitio Web</h3>
+                <p className="text-sm text-muted-foreground">
+                  Haz clic en cualquier texto directamente en la página para cambiarlo
+                </p>
+              </div>
+            </div>
+            <Button
+              onClick={() => navigate("/?edit=true")}
+              className="bg-primary text-primary-foreground hover:bg-primary/90"
+            >
+              <ExternalLink className="h-4 w-4 mr-2" />
+              Entrar al Modo Edición
+            </Button>
+          </CardContent>
+        </Card>
 
-          <TabsContent value="messages">
-            <AdminMessages />
-          </TabsContent>
-
-          <TabsContent value="content">
-            <AdminContent />
-          </TabsContent>
-        </Tabs>
+        {/* Messages */}
+        <AdminMessages />
       </main>
     </div>
   );

@@ -12,6 +12,8 @@ import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTABanner from "@/components/CTABanner";
+import EditableText from "@/components/admin/EditableText";
+import { useEditMode } from "@/contexts/EditModeContext";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -35,6 +37,7 @@ const Contacto = () => {
   const { toast } = useToast();
   const [submitted, setSubmitted] = useState(false);
   const [clientType, setClientType] = useState("");
+  const { isEditMode } = useEditMode();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -60,7 +63,7 @@ const Contacto = () => {
   };
 
   return (
-    <>
+    <div className={isEditMode ? "pt-14" : ""}>
       <Navbar />
 
       {/* Hero */}
@@ -70,13 +73,9 @@ const Contacto = () => {
       >
         <div className="container mx-auto px-4 py-20 md:py-28 relative z-10 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <p className="text-primary-foreground/60 text-xs tracking-widest mb-3 uppercase">Estamos para ayudarte</p>
-            <h1 className="font-display text-3xl md:text-5xl font-bold text-primary-foreground leading-tight">
-              AGENDA UNA EVALUACIÓN TÉCNICA GRATUITA
-            </h1>
-            <p className="text-primary-foreground/70 mt-4 max-w-xl mx-auto text-sm">
-              Completa el formulario y te contactaremos en menos de 24 horas. Sin compromiso.
-            </p>
+            <EditableText contentKey="contacto__hero__subtitle" defaultValue="Estamos para ayudarte" as="p" className="text-primary-foreground/60 text-xs tracking-widest mb-3 uppercase" />
+            <EditableText contentKey="contacto__hero__title" defaultValue="AGENDA UNA EVALUACIÓN TÉCNICA GRATUITA" as="h1" className="font-display text-3xl md:text-5xl font-bold text-primary-foreground leading-tight" />
+            <EditableText contentKey="contacto__hero__description" defaultValue="Completa el formulario y te contactaremos en menos de 24 horas. Sin compromiso." as="p" className="text-primary-foreground/70 mt-4 max-w-xl mx-auto text-sm" />
           </motion.div>
         </div>
         <div className="absolute bottom-0 left-0 right-0">
@@ -263,7 +262,7 @@ const Contacto = () => {
 
       <CTABanner />
       <Footer />
-    </>
+    </div>
   );
 };
 
