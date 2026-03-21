@@ -1,35 +1,20 @@
 import { Link } from "react-router-dom";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, AlertTriangle, DollarSign, Droplets, CheckCircle, Building } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTABanner from "@/components/CTABanner";
+import EditableText from "@/components/admin/EditableText";
+import { useEditMode } from "@/contexts/EditModeContext";
 import logo from "@/assets/logo.png";
 
-const staggerContainer = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
-};
+const staggerContainer = { hidden: {}, visible: { transition: { staggerChildren: 0.1 } } };
 
 const scaleIn = {
   hidden: { opacity: 0, scale: 0.8 },
-  visible: (i: number) => ({
-    opacity: 1,
-    scale: 1,
-    transition: { delay: i * 0.15, duration: 0.5, ease: [0.22, 1, 0.36, 1] },
-  }),
-};
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.12, duration: 0.6, ease: [0.22, 1, 0.36, 1] },
-  }),
+  visible: (i: number) => ({ opacity: 1, scale: 1, transition: { delay: i * 0.15, duration: 0.5, ease: [0.22, 1, 0.36, 1] } }),
 };
 
 const slideInLeft = {
@@ -58,63 +43,29 @@ const Condominios = () => {
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 80]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const { isEditMode } = useEditMode();
 
   return (
-    <>
+    <div className={isEditMode ? "pt-14" : ""}>
       <Navbar />
 
-      {/* Hero — parallax + stagger */}
-      <motion.section
-        ref={heroRef}
-        className="relative overflow-hidden min-h-[500px] md:min-h-[600px]"
-        style={{ background: "linear-gradient(135deg, hsl(195, 60%, 25%) 0%, hsl(190, 50%, 35%) 50%, hsl(185, 55%, 50%) 100%)" }}
-      >
-        {/* Floating shapes */}
-        <motion.div
-          className="absolute top-16 right-16 w-72 h-72 rounded-full opacity-10"
-          style={{ background: "radial-gradient(circle, hsl(190, 60%, 50%), transparent)" }}
-          animate={{ y: [0, -20, 0], scale: [1, 1.05, 1] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute bottom-20 left-10 w-48 h-48 rounded-full opacity-[0.07]"
-          style={{ background: "radial-gradient(circle, hsl(180, 50%, 60%), transparent)" }}
-          animate={{ y: [0, 15, 0], x: [0, 10, 0] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        />
+      {/* Hero */}
+      <motion.section ref={heroRef} className="relative overflow-hidden min-h-[500px] md:min-h-[600px]" style={{ background: "linear-gradient(135deg, hsl(195, 60%, 25%) 0%, hsl(190, 50%, 35%) 50%, hsl(185, 55%, 50%) 100%)" }}>
+        <motion.div className="absolute top-16 right-16 w-72 h-72 rounded-full opacity-10" style={{ background: "radial-gradient(circle, hsl(190, 60%, 50%), transparent)" }} animate={{ y: [0, -20, 0], scale: [1, 1.05, 1] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} />
+        <motion.div className="absolute bottom-20 left-10 w-48 h-48 rounded-full opacity-[0.07]" style={{ background: "radial-gradient(circle, hsl(180, 50%, 60%), transparent)" }} animate={{ y: [0, 15, 0], x: [0, 10, 0] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }} />
 
         <motion.div style={{ y: heroY, opacity: heroOpacity }} className="container mx-auto px-4 py-20 md:py-28 relative z-10">
           <div className="max-w-3xl">
-            <motion.p
-              className="text-primary-foreground/60 text-xs tracking-widest mb-3 uppercase"
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            >
-              Soluciones para Comunidades
-            </motion.p>
-            <motion.h1
-              className="font-display text-3xl md:text-5xl font-bold text-primary-foreground leading-tight mb-4"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            >
-              COMUNIDADES MÁS SEGURAS Y EFICIENTES
-            </motion.h1>
-            <motion.p
-              className="text-primary-foreground/70 text-sm tracking-wide mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-            >
-              Nos encargamos de tus calderas, bombas y sistemas de agua para que ahorres en reparaciones y mantenciones
-            </motion.p>
-            <motion.div
-              className="flex flex-col sm:flex-row gap-3"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.6 }}
-            >
+            <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2, duration: 0.6 }}>
+              <EditableText contentKey="condominios__hero__subtitle" defaultValue="Soluciones para Comunidades" as="p" className="text-primary-foreground/60 text-xs tracking-widest mb-3 uppercase" />
+            </motion.div>
+            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.7 }}>
+              <EditableText contentKey="condominios__hero__title" defaultValue="COMUNIDADES MÁS SEGURAS Y EFICIENTES" as="h1" className="font-display text-3xl md:text-5xl font-bold text-primary-foreground leading-tight mb-4" />
+            </motion.div>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.6 }}>
+              <EditableText contentKey="condominios__hero__description" defaultValue="Nos encargamos de tus calderas, bombas y sistemas de agua para que ahorres en reparaciones y mantenciones" as="p" className="text-primary-foreground/70 text-sm tracking-wide mb-8" multiline />
+            </motion.div>
+            <motion.div className="flex flex-col sm:flex-row gap-3" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.6 }}>
               <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold px-6 hover:scale-105 transition-transform">
                 <Link to="/contacto">Solicita una Cotización Gratuita <ArrowRight className="ml-2 h-4 w-4" /></Link>
               </Button>
@@ -131,37 +82,16 @@ const Condominios = () => {
         </div>
       </motion.section>
 
-      {/* Problems — stagger + hover */}
+      {/* Problems */}
       <section className="bg-background py-20 md:py-28">
         <div className="container mx-auto px-4">
-          <motion.h2
-            className="font-display text-2xl md:text-3xl font-bold text-foreground text-center mb-16 tracking-wide"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            ¿PROBLEMAS FRECUENTES EN TU COMUNIDAD?
-          </motion.h2>
-          <motion.div
-            className="grid md:grid-cols-3 gap-10 max-w-3xl mx-auto"
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+            <EditableText contentKey="condominios__problems__title" defaultValue="¿PROBLEMAS FRECUENTES EN TU COMUNIDAD?" as="h2" className="font-display text-2xl md:text-3xl font-bold text-foreground text-center mb-16 tracking-wide" />
+          </motion.div>
+          <motion.div className="grid md:grid-cols-3 gap-10 max-w-3xl mx-auto" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
             {problems.map((p, i) => (
-              <motion.div
-                key={p.title}
-                custom={i}
-                variants={scaleIn}
-                whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                className="text-center cursor-default"
-              >
-                <motion.div
-                  className="w-20 h-20 rounded-full border-2 border-primary/20 flex items-center justify-center mx-auto mb-4 bg-light-bg"
-                  whileHover={{ scale: 1.1, borderColor: "hsl(var(--primary))", transition: { duration: 0.3 } }}
-                >
+              <motion.div key={p.title} custom={i} variants={scaleIn} whileHover={{ y: -8 }} className="text-center cursor-default">
+                <motion.div className="w-20 h-20 rounded-full border-2 border-primary/20 flex items-center justify-center mx-auto mb-4 bg-light-bg" whileHover={{ scale: 1.1 }}>
                   <p.icon className="h-8 w-8 text-primary" />
                 </motion.div>
                 <h3 className="font-display font-bold text-sm text-foreground mb-1 tracking-wide">{p.title}</h3>
@@ -172,7 +102,7 @@ const Condominios = () => {
         </div>
       </section>
 
-      {/* Solutions — gradient band with glassmorphism */}
+      {/* Solutions */}
       <section className="relative" style={{ background: "linear-gradient(135deg, hsl(195, 60%, 25%) 0%, hsl(190, 50%, 35%) 50%, hsl(185, 55%, 50%) 100%)" }}>
         <div className="absolute top-0 left-0 right-0">
           <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-8 md:h-14" preserveAspectRatio="none">
@@ -190,11 +120,7 @@ const Condominios = () => {
                   { title: "INSTALAMOS", desc: "Dispositivos que mejoran la calidad del agua y reducen costos." },
                   { title: "SOPORTE CONTINUO", desc: "Atención 24/7" },
                 ].map((item) => (
-                  <motion.div
-                    key={item.title}
-                    className="flex items-start gap-3 bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/20 rounded-xl p-4 hover:bg-primary-foreground/15 transition-colors duration-300"
-                    whileHover={{ x: 6, transition: { duration: 0.3 } }}
-                  >
+                  <motion.div key={item.title} className="flex items-start gap-3 bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/20 rounded-xl p-4 hover:bg-primary-foreground/15 transition-colors duration-300" whileHover={{ x: 6 }}>
                     <CheckCircle className="h-5 w-5 text-primary-foreground/80 mt-0.5 shrink-0" />
                     <div>
                       <p className="font-semibold text-sm text-primary-foreground">{item.title}</p>
@@ -204,20 +130,8 @@ const Condominios = () => {
                 ))}
               </div>
             </motion.div>
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={slideInRight}
-              className="flex flex-col items-center gap-4"
-            >
-              <motion.img
-                style={{ filter: "brightness(0) invert(1)" }}
-                src={logo}
-                alt="BioAgua Chile"
-                className="h-28 w-auto"
-                whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
-              />
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={slideInRight} className="flex flex-col items-center gap-4">
+              <motion.img style={{ filter: "brightness(0) invert(1)" }} src={logo} alt="BioAgua" className="h-28 w-auto" whileHover={{ scale: 1.05 }} />
             </motion.div>
           </div>
         </div>
@@ -228,36 +142,19 @@ const Condominios = () => {
         </div>
       </section>
 
-      {/* Cases of Success — slide in cards */}
+      {/* Cases of Success */}
       <section className="bg-light-bg py-20 md:py-28 overflow-hidden">
         <div className="container mx-auto px-4 text-center">
-          <motion.h2
-            className="font-display text-2xl md:text-3xl font-bold text-foreground mb-14 tracking-wide"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            CASOS DE ÉXITO
-          </motion.h2>
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+            <EditableText contentKey="condominios__cases__title" defaultValue="CASOS DE ÉXITO" as="h2" className="font-display text-2xl md:text-3xl font-bold text-foreground mb-14 tracking-wide" />
+          </motion.div>
           <div className="relative max-w-4xl mx-auto">
             <div className="grid md:grid-cols-2 gap-10">
               {cases.map((c, i) => (
-                <motion.div
-                  key={c.name}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  variants={i === 0 ? slideInLeft : slideInRight}
-                  whileHover={{ y: -6, transition: { duration: 0.3 } }}
-                  className="cursor-default"
-                >
+                <motion.div key={c.name} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={i === 0 ? slideInLeft : slideInRight} whileHover={{ y: -6 }} className="cursor-default">
                   <div className="text-center p-6 rounded-xl bg-background/50 backdrop-blur-sm border border-border/50 hover:border-primary/30 hover:shadow-lg transition-all duration-300">
                     <p className="text-primary font-semibold text-sm mb-4">{c.name}</p>
-                    <motion.div
-                      className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4"
-                      whileHover={{ scale: 1.15, transition: { duration: 0.3 } }}
-                    >
+                    <motion.div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4" whileHover={{ scale: 1.15 }}>
                       <c.icon className="h-7 w-7 text-primary" />
                     </motion.div>
                     <h3 className="font-display font-bold text-foreground text-sm md:text-base mb-2 tracking-wide">{c.stat}</h3>
@@ -270,21 +167,11 @@ const Condominios = () => {
         </div>
       </section>
 
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-      >
-        <CTABanner
-          title="CONTÁCTANOS PARA UNA PROPUESTA PERSONALIZADA"
-          subtitle=""
-          buttonText="Conversemos"
-          buttonText2="Solicita Más Información"
-        />
+      <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+        <CTABanner title="CONTÁCTANOS PARA UNA PROPUESTA PERSONALIZADA" subtitle="" buttonText="Conversemos" buttonText2="Solicita Más Información" />
       </motion.div>
       <Footer />
-    </>
+    </div>
   );
 };
 

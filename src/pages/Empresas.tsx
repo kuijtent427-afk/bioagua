@@ -7,29 +7,20 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTABanner from "@/components/CTABanner";
+import EditableText from "@/components/admin/EditableText";
+import { useEditMode } from "@/contexts/EditModeContext";
 import logo from "@/assets/logo.png";
 
-const staggerContainer = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
-};
+const staggerContainer = { hidden: {}, visible: { transition: { staggerChildren: 0.1 } } };
 
 const scaleIn = {
   hidden: { opacity: 0, scale: 0.8 },
-  visible: (i: number) => ({
-    opacity: 1,
-    scale: 1,
-    transition: { delay: i * 0.15, duration: 0.5, ease: [0.22, 1, 0.36, 1] },
-  }),
+  visible: (i: number) => ({ opacity: 1, scale: 1, transition: { delay: i * 0.15, duration: 0.5, ease: [0.22, 1, 0.36, 1] } }),
 };
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.12, duration: 0.6, ease: [0.22, 1, 0.36, 1] },
-  }),
+  visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.12, duration: 0.6, ease: [0.22, 1, 0.36, 1] } }),
 };
 
 const slideInLeft = {
@@ -59,62 +50,28 @@ const Empresas = () => {
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 80]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const { isEditMode } = useEditMode();
 
   return (
-    <>
+    <div className={isEditMode ? "pt-14" : ""}>
       <Navbar />
 
-      {/* Hero — parallax + stagger */}
-      <motion.section
-        ref={heroRef}
-        className="relative overflow-hidden min-h-[500px] md:min-h-[600px]"
-        style={{ background: "linear-gradient(135deg, hsl(195, 60%, 25%) 0%, hsl(190, 50%, 35%) 50%, hsl(185, 55%, 50%) 100%)" }}
-      >
-        {/* Floating shapes */}
-        <motion.div
-          className="absolute top-16 right-16 w-72 h-72 rounded-full opacity-10"
-          style={{ background: "radial-gradient(circle, hsl(190, 60%, 50%), transparent)" }}
-          animate={{ y: [0, -20, 0], scale: [1, 1.05, 1] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute bottom-20 left-10 w-48 h-48 rounded-full opacity-[0.07]"
-          style={{ background: "radial-gradient(circle, hsl(180, 50%, 60%), transparent)" }}
-          animate={{ y: [0, 15, 0], x: [0, 10, 0] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        />
+      {/* Hero */}
+      <motion.section ref={heroRef} className="relative overflow-hidden min-h-[500px] md:min-h-[600px]" style={{ background: "linear-gradient(135deg, hsl(195, 60%, 25%) 0%, hsl(190, 50%, 35%) 50%, hsl(185, 55%, 50%) 100%)" }}>
+        <motion.div className="absolute top-16 right-16 w-72 h-72 rounded-full opacity-10" style={{ background: "radial-gradient(circle, hsl(190, 60%, 50%), transparent)" }} animate={{ y: [0, -20, 0], scale: [1, 1.05, 1] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} />
+        <motion.div className="absolute bottom-20 left-10 w-48 h-48 rounded-full opacity-[0.07]" style={{ background: "radial-gradient(circle, hsl(180, 50%, 60%), transparent)" }} animate={{ y: [0, 15, 0], x: [0, 10, 0] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }} />
 
         <motion.div style={{ y: heroY, opacity: heroOpacity }} className="container mx-auto px-4 py-20 md:py-28 relative z-10 text-center">
-          <motion.p
-            className="text-primary-foreground/60 text-xs tracking-widest mb-3 uppercase"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          >
-            Soluciones Industriales
-          </motion.p>
-          <motion.h1
-            className="font-display text-3xl md:text-5xl font-bold text-primary-foreground leading-tight mb-4 max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          >
-            EMPRESAS QUE BUSCAN EFICIENCIA Y SOSTENIBILIDAD
-          </motion.h1>
-          <motion.p
-            className="text-primary-foreground/70 text-sm mb-8 max-w-xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
-          >
-            Optimizamos tus procesos, cuidamos tus equipos y reducimos tus costos operativos.
-          </motion.p>
-          <motion.div
-            className="flex flex-col sm:flex-row gap-3 justify-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.6 }}
-          >
+          <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }}>
+            <EditableText contentKey="empresas__hero__subtitle" defaultValue="Soluciones Industriales" as="p" className="text-primary-foreground/60 text-xs tracking-widest mb-3 uppercase" />
+          </motion.div>
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.7 }}>
+            <EditableText contentKey="empresas__hero__title" defaultValue="EMPRESAS QUE BUSCAN EFICIENCIA Y SOSTENIBILIDAD" as="h1" className="font-display text-3xl md:text-5xl font-bold text-primary-foreground leading-tight mb-4 max-w-3xl mx-auto" />
+          </motion.div>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.6 }}>
+            <EditableText contentKey="empresas__hero__description" defaultValue="Optimizamos tus procesos, cuidamos tus equipos y reducimos tus costos operativos." as="p" className="text-primary-foreground/70 text-sm mb-8 max-w-xl mx-auto" />
+          </motion.div>
+          <motion.div className="flex flex-col sm:flex-row gap-3 justify-center" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.6 }}>
             <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold px-6 hover:scale-105 transition-transform">
               <Link to="/contacto">Hablemos Hoy</Link>
             </Button>
@@ -130,46 +87,19 @@ const Empresas = () => {
         </div>
       </motion.section>
 
-      {/* Problems — stagger + hover */}
+      {/* Problems */}
       <section className="bg-background py-20 md:py-28">
         <div className="container mx-auto px-4">
-          <motion.h2
-            className="font-display text-2xl md:text-3xl font-bold text-foreground text-center mb-3 tracking-wide"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            ¿TUS SISTEMAS ESTÁN FALLANDO?
-          </motion.h2>
-          <motion.p
-            className="text-muted-foreground text-sm text-center mb-14 max-w-lg mx-auto"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-          >
-            Identificamos los problemas más comunes en la industria y los solucionamos de raíz.
-          </motion.p>
-          <motion.div
-            className="grid md:grid-cols-3 gap-10 max-w-3xl mx-auto"
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+            <EditableText contentKey="empresas__problems__title" defaultValue="¿TUS SISTEMAS ESTÁN FALLANDO?" as="h2" className="font-display text-2xl md:text-3xl font-bold text-foreground text-center mb-3 tracking-wide" />
+          </motion.div>
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2, duration: 0.6 }}>
+            <EditableText contentKey="empresas__problems__description" defaultValue="Identificamos los problemas más comunes en la industria y los solucionamos de raíz." as="p" className="text-muted-foreground text-sm text-center mb-14 max-w-lg mx-auto" />
+          </motion.div>
+          <motion.div className="grid md:grid-cols-3 gap-10 max-w-3xl mx-auto" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
             {problems.map((p, i) => (
-              <motion.div
-                key={p.title}
-                custom={i}
-                variants={scaleIn}
-                whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                className="text-center cursor-default"
-              >
-                <motion.div
-                  className="w-20 h-20 rounded-full border-2 border-primary/20 flex items-center justify-center mx-auto mb-4 bg-light-bg"
-                  whileHover={{ scale: 1.1, borderColor: "hsl(var(--primary))", transition: { duration: 0.3 } }}
-                >
+              <motion.div key={p.title} custom={i} variants={scaleIn} whileHover={{ y: -8 }} className="text-center cursor-default">
+                <motion.div className="w-20 h-20 rounded-full border-2 border-primary/20 flex items-center justify-center mx-auto mb-4 bg-light-bg" whileHover={{ scale: 1.1 }}>
                   <p.icon className="h-8 w-8 text-primary" />
                 </motion.div>
                 <h3 className="font-display font-bold text-sm text-foreground mb-1">{p.title}</h3>
@@ -180,7 +110,7 @@ const Empresas = () => {
         </div>
       </section>
 
-      {/* Solutions — gradient band with glassmorphism */}
+      {/* Solutions */}
       <section className="relative" style={{ background: "linear-gradient(135deg, hsl(195, 60%, 25%) 0%, hsl(190, 50%, 35%) 50%, hsl(185, 55%, 50%) 100%)" }}>
         <div className="absolute top-0 left-0 right-0">
           <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-8 md:h-14" preserveAspectRatio="none">
@@ -197,12 +127,8 @@ const Empresas = () => {
                   { title: "INSTALAMOS", desc: "Ionizadores que eliminan sarro y prolongan la vida útil de tus equipos." },
                   { title: "MANTENEMOS", desc: "Tus calderas y sistemas operativos al 100%." },
                   { title: "DISEÑAMOS", desc: "Soluciones personalizadas para tu industria." },
-                ].map((item, i) => (
-                  <motion.div
-                    key={item.title}
-                    className="flex items-start gap-3 bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/20 rounded-xl p-4 hover:bg-primary-foreground/15 transition-colors duration-300"
-                    whileHover={{ x: 6, transition: { duration: 0.3 } }}
-                  >
+                ].map((item) => (
+                  <motion.div key={item.title} className="flex items-start gap-3 bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/20 rounded-xl p-4 hover:bg-primary-foreground/15 transition-colors duration-300" whileHover={{ x: 6 }}>
                     <CheckCircle className="h-5 w-5 text-primary-foreground/80 mt-0.5 shrink-0" />
                     <div>
                       <p className="font-semibold text-sm text-primary-foreground">{item.title}</p>
@@ -212,20 +138,8 @@ const Empresas = () => {
                 ))}
               </div>
             </motion.div>
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={slideInRight}
-              className="flex flex-col items-center gap-4"
-            >
-              <motion.img
-                style={{ filter: "brightness(0) invert(1)" }}
-                src={logo}
-                alt="BioAgua Chile"
-                className="h-28 w-auto"
-                whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
-              />
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={slideInRight} className="flex flex-col items-center gap-4">
+              <motion.img style={{ filter: "brightness(0) invert(1)" }} src={logo} alt="BioAgua" className="h-28 w-auto" whileHover={{ scale: 1.05 }} />
             </motion.div>
           </div>
         </div>
@@ -236,41 +150,21 @@ const Empresas = () => {
         </div>
       </section>
 
-      {/* Trust section — animated cards */}
+      {/* Trust section */}
       <section className="bg-background py-20 md:py-28">
         <div className="container mx-auto px-4">
-          <motion.h2
-            className="font-display text-2xl md:text-3xl font-bold text-foreground text-center mb-3 tracking-wide"
-            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={slideInLeft}
-          >
-            ¿POR QUÉ CONFIAR EN NOSOTROS?
-          </motion.h2>
-          <motion.p
-            className="text-muted-foreground text-sm text-center mb-14 max-w-lg mx-auto"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-          >
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={slideInLeft}>
+            <EditableText contentKey="empresas__trust__title" defaultValue="¿POR QUÉ CONFIAR EN NOSOTROS?" as="h2" className="font-display text-2xl md:text-3xl font-bold text-foreground text-center mb-3 tracking-wide" />
+          </motion.div>
+          <motion.p className="text-muted-foreground text-sm text-center mb-14 max-w-lg mx-auto" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2, duration: 0.6 }}>
             Respaldamos cada proyecto con tecnología, experiencia y compromiso.
           </motion.p>
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {trustCards.map((c, i) => (
-              <motion.div
-                key={c.title}
-                custom={i}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeUp}
-                whileHover={{ y: -6, scale: 1.03, transition: { duration: 0.3 } }}
-              >
+              <motion.div key={c.title} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} whileHover={{ y: -6, scale: 1.03 }}>
                 <Card className="h-full border border-border shadow-sm bg-card rounded-xl hover:border-primary/30 hover:shadow-lg transition-all duration-300">
                   <CardContent className="p-6 flex items-start gap-4">
-                    <motion.div
-                      className="w-12 h-12 rounded-full border-2 border-primary/20 flex items-center justify-center shrink-0 bg-light-bg"
-                      whileHover={{ rotate: [0, -10, 10, 0], transition: { duration: 0.5 } }}
-                    >
+                    <motion.div className="w-12 h-12 rounded-full border-2 border-primary/20 flex items-center justify-center shrink-0 bg-light-bg" whileHover={{ rotate: [0, -10, 10, 0] }}>
                       <c.icon className="h-5 w-5 text-primary" />
                     </motion.div>
                     <div>
@@ -285,21 +179,11 @@ const Empresas = () => {
         </div>
       </section>
 
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-      >
-        <CTABanner
-          title="AGENDA UNA EVALUACIÓN TÉCNICA"
-          subtitle="SIN COSTO"
-          buttonText="Agendar Evaluación"
-          buttonText2="Solicita Más Información"
-        />
+      <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+        <CTABanner title="AGENDA UNA EVALUACIÓN TÉCNICA" subtitle="SIN COSTO" buttonText="Agendar Evaluación" buttonText2="Solicita Más Información" />
       </motion.div>
       <Footer />
-    </>
+    </div>
   );
 };
 
