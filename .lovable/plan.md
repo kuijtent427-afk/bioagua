@@ -1,91 +1,114 @@
 
 
-## UI Enhancement Plan: Professional & Distinctive BioAgua Website
+## Comprehensive UI Upgrade Plan
 
-### Current State Assessment
-The site has a solid foundation with framer-motion animations, teal gradients, wave dividers, and glassmorphism. However, all pages follow a very similar visual rhythm (hero → icons in circles → gradient section → CTA), making them feel repetitive. Key gaps:
-- No floating WhatsApp button for instant contact
-- Navbar is basic (no CTA button, no scroll effect)
-- No client logo bar / social proof strip
-- Hero sections across pages look nearly identical (same gradient, same layout)
-- Cards and sections use the same patterns everywhere
-- No testimonial/quote component
-- Footer is functional but plain
-- No page transition animations
-- No "back to top" button
-- No loading/skeleton states
+This is a major visual and UX overhaul across all pages and shared components to elevate the site to a premium, modern standard while preserving the existing teal/aqua brand identity and all admin EditableText functionality.
 
-### Plan
+---
 
-#### 1. Enhanced Navbar
-- Add a "Contáctanos" CTA button on the right side of desktop nav
-- Add background opacity transition on scroll (fully transparent at top, solid on scroll)
-- Slightly increase height and add subtle shadow on scroll
+### 1. Global Styles & Design System Refinements
 
-#### 2. Floating WhatsApp Button
-- Create a persistent floating WhatsApp button (bottom-right corner) with pulse animation
-- Links to `wa.me/56925835836`
-- Visible on all pages, stays above footer
+**File: `src/index.css`**
+- Add smooth scroll behavior to `html`
+- Add subtle text rendering improvements (`-webkit-font-smoothing`, `text-rendering`)
+- Add new utility classes: `.text-gradient` (teal gradient text), `.section-padding` (consistent vertical rhythm)
+- Improve `glass-card` with stronger blur and subtle shadow
 
-#### 3. Client Logo Trust Bar (Home page)
-- Add a horizontal scrolling/static strip of client logos or "Confían en nosotros" badges below the hero
-- Use placeholder company names styled as text badges if no real logos are available yet
-- Adds immediate social proof
+**File: `tailwind.config.ts`**
+- Add custom `boxShadow` tokens (soft, medium, strong) for consistent depth
+- Add a `fade-in-up` and `blur-in` keyframe animation for richer entrance effects
 
-#### 4. Testimonials Component
-- Create a testimonial card with quote marks, client name, and company
-- Add to Home page between "Why Choose Us" and "Cases of Success"
-- Subtle card with left accent border and quote icon
+---
 
-#### 5. Distinct Page Hero Variations
-- **Home**: Keep the image-based hero (unique already)
-- **Nosotros**: Add a subtle pattern overlay (dots or grid) to differentiate from other gradient heroes
-- **Empresas**: Add a diagonal split layout (text left, large icon/illustration right)
-- **Condominios**: Add a counter/stat bar directly inside the hero
-- **Contacto**: Make hero shorter and more compact since the form is the focus
+### 2. Navbar Upgrade
 
-#### 6. Animated Counter Component
-- Replace the static `CountUp` component with actual animated number counting (using framer-motion `useMotionValue` + `useSpring`)
-- Numbers animate from 0 to target value when scrolled into view
+**File: `src/components/Navbar.tsx`**
+- Increase logo size slightly, add smooth opacity transition on scroll
+- Add a subtle glow/shadow to the CTA button in the nav
+- Improve mobile menu: add background blur overlay behind the sheet, smoother slide-in from right instead of accordion-style height animation
+- Add active link indicator with a subtle pill background instead of just underline
 
-#### 7. Improved Card Designs
-- Add gradient accent borders on hover (left border slides in with color)
-- Add subtle grain/noise texture to gradient sections for depth
-- Use glass-card variant with stronger blur for key cards
+---
 
-#### 8. Smooth Page Transitions
-- Wrap routes in `AnimatePresence` with fade+slide transitions between pages
-- Gives the site a polished SPA feel
+### 3. Homepage (Index) Overhaul
 
-#### 9. Back to Top Button
-- Floating button appears after scrolling 400px
-- Smooth scroll to top with fade-in animation
-- Positioned bottom-left (WhatsApp is bottom-right)
+**File: `src/pages/Index.tsx`**
+- **Hero**: Add a subtle animated gradient mesh background behind the hero image for more visual depth. Increase heading size on desktop. Add a badge/pill above the subtitle (e.g., "Servicio Certificado").
+- **Problems section**: Convert from plain circles to elevated cards with icon, title, description, and a subtle gradient border on hover. Better spacing.
+- **Solutions section**: Add numbered steps (01, 02, 03) to each card for visual hierarchy. Slightly larger cards with more padding.
+- **Why Choose Us**: Replace plain counters with cards that have icons and background accents. Add a decorative line connecting them.
+- **Use Cases**: Add a subtle background pattern. Make cards taller with better icon treatment (gradient background circles).
 
-#### 10. Footer Enhancement
-- Add a mini newsletter/subscription CTA or a tagline banner above the footer columns
-- Add social media icon placeholders (Instagram, LinkedIn)
+---
 
-### Files to Create/Modify
-- **Create**: `src/components/WhatsAppButton.tsx` — floating button
-- **Create**: `src/components/BackToTop.tsx` — scroll-to-top button  
-- **Create**: `src/components/ClientLogos.tsx` — trust bar
-- **Create**: `src/components/Testimonials.tsx` — testimonial cards
-- **Create**: `src/components/AnimatedCounter.tsx` — real counting animation
-- **Modify**: `src/components/Navbar.tsx` — scroll effect + CTA button
-- **Modify**: `src/components/Footer.tsx` — social icons + tagline
-- **Modify**: `src/App.tsx` — page transitions with AnimatePresence
-- **Modify**: `src/pages/Index.tsx` — add trust bar, testimonials, use AnimatedCounter
-- **Modify**: `src/pages/Nosotros.tsx` — pattern overlay on hero
-- **Modify**: `src/pages/Empresas.tsx` — diagonal hero layout
-- **Modify**: `src/pages/Condominios.tsx` — stat bar in hero
-- **Modify**: `src/pages/Contacto.tsx` — compact hero
-- **Modify**: `src/index.css` — grain texture utility, glass-card variant
+### 4. Nosotros Page
 
-### Technical Notes
-- All new components use framer-motion for consistency
-- WhatsApp and BackToTop buttons rendered in App.tsx layout so they persist across pages
-- AnimatePresence wraps the route outlet for page transitions
-- No new dependencies needed (framer-motion already installed)
-- All existing EditableText integrations preserved
+**File: `src/pages/Nosotros.tsx`**
+- **Hero**: Add animated particles or floating shapes for visual interest
+- **Trust headline**: Make the number/stat more prominent with a gradient text effect
+- **About section**: Replace the plain logo with a more compelling layout - add a decorative frame/border around the image area
+- **Solutions cards**: Add subtle number indicators and improve the hover state with a left-border accent animation
+
+---
+
+### 5. Empresas Page
+
+**File: `src/pages/Empresas.tsx`**
+- **Hero**: Replace the floating Factory icon box with a more compelling visual - use stacked floating cards or a dashboard-like mockup shape
+- **Problems**: Improve with connecting lines between the 3 items to show progression
+- **Trust section cards**: Add gradient icon backgrounds and stronger shadow on hover
+
+---
+
+### 6. Condominios Page
+
+**File: `src/pages/Condominios.tsx`**
+- **Hero stat bar**: Improve with animated number counting and better visual separation (vertical dividers with gradient)
+- **Problems/Solutions**: Consistent improvements matching the Empresas page upgrades
+
+---
+
+### 7. Contacto Page
+
+**File: `src/pages/Contacto.tsx`**
+- **Trust badges**: Add subtle animated pulse on the icons
+- **Form card**: Add floating label effect, better focus states with primary color glow, slightly rounded inputs
+- **Contact info cards**: Add gradient icon backgrounds matching the brand
+- **Success state**: Add confetti-like animation or a more celebratory visual
+
+---
+
+### 8. Shared Components
+
+**File: `src/components/CTABanner.tsx`**
+- Add animated gradient background instead of flat `bg-secondary`
+- Make buttons more prominent: one filled primary, one outline with glow effect
+- Add a decorative wave/mesh pattern overlay
+
+**File: `src/components/Footer.tsx`**
+- Add a gradient top border accent line
+- Improve link hover states with underline slide animation
+- Better visual hierarchy with section dividers
+
+**File: `src/components/Testimonials.tsx`**
+- Add star ratings visual
+- Add avatar placeholder circles with initials
+- Improve card design with gradient quote marks
+
+**File: `src/components/BackToTop.tsx`**
+- Add a progress ring around the button showing scroll position
+
+**File: `src/pages/NotFound.tsx`**
+- Complete redesign with brand styling, animated 404 number, water-themed illustration, and proper navigation back
+
+---
+
+### Technical Details
+
+- All changes preserve existing `EditableText` wrappers and `contentKey` props
+- All changes use existing framer-motion patterns and extend them
+- No new dependencies needed - everything uses Tailwind, framer-motion, and lucide-react already in the project
+- Mobile responsiveness maintained and improved throughout
+- All animation variants follow existing easing curves `[0.22, 1, 0.36, 1]`
+- Changes are purely visual/CSS/animation - no database or backend changes needed
 
