@@ -35,8 +35,25 @@ const Contacto = () => {
   const { toast } = useToast();
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const { error } = await supabase.from("contact_messages").insert({
+      name: formData.get("name") as string,
+      email: formData.get("email") as string,
+      phone: (formData.get("phone") as string) || null,
+      client_type: (formData.get("clientType") as string) || null,
+      subject: (formData.get("subject") as string) || null,
+      message: formData.get("message") as string,
+    });
+
+    if (error) {
+      toast({ title: "Error al enviar", description: "Intenta nuevamente.", variant: "destructive" });
+      return;
+    }
+
     setSubmitted(true);
     toast({ title: "¡Solicitud enviada!", description: "Nos pondremos en contacto contigo en menos de 24 horas." });
   };
