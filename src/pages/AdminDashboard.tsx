@@ -89,6 +89,11 @@ const AdminDashboard = () => {
 
         {/* Messages */}
         <AdminMessages />
+
+        {/* Change password */}
+        <div className="mt-8">
+          <ChangePassword />
+        </div>
       </main>
     </div>
   );
