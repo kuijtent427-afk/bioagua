@@ -151,11 +151,11 @@ const Index = () => {
           </motion.div>
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {solutions.map((s, i) => (
-              <motion.div key={s.title} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} whileHover={{ y: -6, scale: 1.03 }}>
+              <motion.div key={s.key} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} whileHover={{ y: -6, scale: 1.03 }}>
                 <Card className="h-full bg-primary-foreground/10 border border-primary-foreground/20 backdrop-blur-sm rounded-xl hover:bg-primary-foreground/15 transition-colors duration-300">
                   <CardContent className="p-6 text-center flex flex-col items-center gap-4">
                     <s.icon className="h-8 w-8 text-primary-foreground/70" />
-                    <p className="text-sm text-primary-foreground font-medium leading-relaxed">{s.title}</p>
+                    <EditableText contentKey={`index__solutions__${s.key}`} defaultValue={s.title} as="p" className="text-sm text-primary-foreground font-medium leading-relaxed" />
                   </CardContent>
                 </Card>
               </motion.div>
