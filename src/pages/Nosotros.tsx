@@ -220,7 +220,7 @@ const Nosotros = () => {
               <motion.img
                 src={calderaImg}
                 alt="Caldera industrial"
-                className="w-48 h-48 object-contain"
+                className="w-48 h-48 object-contain mix-blend-multiply"
                 whileHover={{ scale: 1.08, transition: { duration: 0.3 } }}
               />
             </motion.div>
