@@ -207,7 +207,7 @@ const Contacto = () => {
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="clientType" className="text-sm font-medium">Tipo de cliente</Label>
-                          <Select required name="clientType" onValueChange={(v) => setClientType(v)}>
+                          <Select name="clientType" onValueChange={(v) => setClientType(v)}>
                             <SelectTrigger id="clientType"><SelectValue placeholder="Seleccionar" /></SelectTrigger>
                             <SelectContent>
                               <SelectItem value="empresa">Empresa</SelectItem>
