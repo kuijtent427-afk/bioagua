@@ -7,6 +7,7 @@ import { useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTABanner from "@/components/CTABanner";
+import heroImage from "@/assets/hero-water.png";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
