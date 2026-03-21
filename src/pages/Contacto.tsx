@@ -266,7 +266,7 @@ const Contacto = () => {
 
       <CTABanner />
       <Footer />
-    </>
+    </div>
   );
 };
 
