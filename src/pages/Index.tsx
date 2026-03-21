@@ -42,13 +42,20 @@ const Index = () => {
         <div className="container mx-auto px-4 py-20 md:py-28 relative z-10">
           <div className="max-w-xl">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-              <p className="text-muted-foreground text-xs tracking-widest mb-3 uppercase">
+              <motion.p
+                className="text-secondary/70 text-xs tracking-widest mb-3 uppercase"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
+              >
                 Tu solución para agua limpia y sistemas eficientes
-              </p>
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-secondary leading-tight mb-4">
-                BIOAGUA <span className="font-light text-foreground">CHILE</span>
+              </motion.p>
+              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">
+                <span className="bg-gradient-to-r from-secondary via-primary to-[hsl(185,55%,45%)] bg-clip-text text-transparent">BIOAGUA</span>
+                {" "}
+                <span className="font-light bg-gradient-to-r from-[hsl(185,55%,45%)] to-secondary bg-clip-text text-transparent">CHILE</span>
               </h1>
-              <p className="text-muted-foreground mb-8 max-w-lg">
+              <p className="text-secondary/70 mb-8 max-w-lg">
                 Desde mantenciones hasta instalaciones, optimizamos tus sistemas para que ahorres tiempo, dinero y recursos.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
