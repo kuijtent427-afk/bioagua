@@ -12,6 +12,8 @@ import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTABanner from "@/components/CTABanner";
+import EditableText from "@/components/admin/EditableText";
+import { useEditMode } from "@/contexts/EditModeContext";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
