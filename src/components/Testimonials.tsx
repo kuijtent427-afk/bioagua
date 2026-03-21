@@ -3,14 +3,10 @@ import { Quote } from "lucide-react";
 
 const testimonials = [
   {
-    quote: "Desde que BioAgua instaló los ionizadores, nuestros costos de mantenimiento bajaron un 35%. El equipo es altamente profesional.",
-    name: "Carlos Méndez",
-    company: "Hotel del Valle",
+    quote: "Desde que instalaron los ionizadores, nuestros costos de mantenimiento bajaron un 35%. El equipo es altamente profesional.",
   },
   {
     quote: "Respuesta inmediata y soluciones reales. Nos resolvieron una emergencia de calderas en menos de 2 horas. Totalmente recomendables.",
-    name: "María González",
-    company: "Condominio Central Park",
   },
 ];
 
