@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, AlertTriangle, DollarSign, Droplets, Siren, Wrench, Zap, Shield, Clock, Users, TrendingDown } from "lucide-react";
+import { AlertTriangle, DollarSign, Droplets, Gauge, Wrench, Zap, Leaf, Shield, Clock, Users, Building, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WaveDivider from "@/components/WaveDivider";
@@ -14,130 +15,186 @@ const fadeUp = {
 };
 
 const problems = [
-  { icon: AlertTriangle, title: "Fallas constantes", desc: "Equipos que se detienen sin aviso, afectando la operación diaria." },
-  { icon: DollarSign, title: "Altos costos", desc: "Facturas de agua y gas que crecen sin control mes a mes." },
-  { icon: Droplets, title: "Incrustaciones (sarro)", desc: "Depósitos minerales que reducen eficiencia y dañan equipos." },
-  { icon: Siren, title: "Emergencias", desc: "Cortes inesperados y urgencias que generan estrés y costos extras." },
+  { icon: AlertTriangle, title: "FALLOS CONSTANTES", desc: "en calderas y bombas" },
+  { icon: DollarSign, title: "ALTOS COSTOS", desc: "de reparación y mantenimiento" },
+  { icon: Gauge, title: "EQUIPOS DETERIORADOS", desc: "por sarro y mala calidad del agua" },
+  { icon: Droplets, title: "ALTOS CONSUMOS", desc: "de agua, gas y energía" },
 ];
 
 const solutions = [
-  { icon: Wrench, title: "Mantención preventiva y correctiva", desc: "Evitamos fallas antes de que ocurran con planes de mantención programada." },
-  { icon: Shield, title: "Ionizadores anti-sarro", desc: "Tecnología que elimina incrustaciones y extiende la vida útil de tus equipos." },
-  { icon: Zap, title: "Optimización energética", desc: "Reducimos tu consumo de agua y gas con ajustes técnicos medibles." },
+  { icon: Wrench, title: "Mantenciones Correctivas y Preventivas", desc: "Planes programados para evitar fallas y reducir costos." },
+  { icon: Zap, title: "Instalación de calderas y dispositivos que optimizan tu sistema", desc: "Tecnología para maximizar eficiencia energética." },
+  { icon: Leaf, title: "Soluciones sustentables para ahorrar agua, energía y costos", desc: "Ionizadores y sistemas ecológicos de alta eficiencia." },
 ];
 
-const stats = [
-  { icon: TrendingDown, value: "Hasta 40%", label: "ahorro en costos de agua y energía" },
-  { icon: Clock, value: "< 2 horas", label: "tiempo de respuesta ante emergencias" },
-  { icon: Users, value: "+50", label: "clientes confían en nosotros" },
+const cases = [
+  { name: "Comunidad Las Palmas", icon: Building, stat: "REDUCCIÓN DEL 40% EN FALLAS DE CALDERAS", desc: "Gracias a nuestras Mantenciones Preventivas." },
+  { name: "Empresas XYZ", icon: Building, stat: "AHORRO DE $30 MILLONES ANUALES", desc: "En consumo energético tras la instalación de Ionizadores." },
 ];
 
-const Index = () => (
-  <>
-    <Navbar />
+const Index = () => {
+  const [caseIndex, setCaseIndex] = useState(0);
 
-    {/* Hero */}
-    <section className="bg-primary relative overflow-hidden">
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 right-10 w-72 h-72 rounded-full bg-accent blur-3xl" />
-        <div className="absolute bottom-10 left-20 w-96 h-96 rounded-full bg-cta blur-3xl" />
-      </div>
-      <div className="container mx-auto px-4 py-20 md:py-32 relative z-10">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-3xl">
-          <h1 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-primary-foreground leading-tight mb-6">
-            Reduce fallas, costos y consumo en tus sistemas de agua
-          </h1>
-          <p className="text-lg md:text-xl text-primary-foreground/80 mb-8 max-w-2xl">
-            Optimizamos calderas, bombas y sistemas hidráulicos para condominios y empresas en todo Chile.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Button asChild size="lg" className="bg-cta text-cta-foreground hover:bg-cta/90 font-semibold text-base px-8">
-              <Link to="/contacto">Agenda evaluación gratuita <ArrowRight className="ml-2 h-5 w-5" /></Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 font-semibold text-base px-8">
-              <Link to="/contacto">Solicita una cotización</Link>
-            </Button>
-          </div>
-        </motion.div>
-      </div>
-    </section>
+  return (
+    <>
+      <Navbar />
 
-    <WaveDivider from="bg-primary" to="bg-background" />
-
-    {/* Problems */}
-    <section className="bg-background py-16 md:py-24">
-      <div className="container mx-auto px-4">
-        <h2 className="font-display text-2xl md:text-4xl font-bold text-foreground text-center mb-4">
-          ¿Te suena familiar?
-        </h2>
-        <p className="text-muted-foreground text-center mb-12 max-w-xl mx-auto">
-          Estos problemas afectan a cientos de condominios y empresas. La buena noticia: tienen solución.
-        </p>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {problems.map((p, i) => (
-            <motion.div key={p.title} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-              <Card className="h-full border-none shadow-md hover:shadow-lg transition-shadow bg-card">
-                <CardContent className="p-6 text-center">
-                  <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center mx-auto mb-4">
-                    <p.icon className="h-7 w-7 text-accent" />
-                  </div>
-                  <h3 className="font-display font-semibold text-lg text-card-foreground mb-2">{p.title}</h3>
-                  <p className="text-sm text-muted-foreground">{p.desc}</p>
-                </CardContent>
-              </Card>
+      {/* Hero — gradient teal/blue with water theme */}
+      <section className="relative overflow-hidden" style={{ background: "linear-gradient(135deg, hsl(195, 60%, 25%) 0%, hsl(190, 50%, 35%) 40%, hsl(185, 55%, 50%) 100%)" }}>
+        <div className="container mx-auto px-4 py-16 md:py-24 relative z-10">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+              <p className="text-primary-foreground/70 text-sm tracking-widest mb-3 uppercase">
+                Tu solución para agua limpia y sistemas eficientes
+              </p>
+              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground leading-tight mb-4">
+                BIOAGUA <span className="font-light">CHILE</span>
+              </h1>
+              <p className="text-primary-foreground/80 mb-8 max-w-lg text-lg">
+                Desde mantenciones hasta instalaciones, optimizamos tus sistemas para que ahorres tiempo, dinero y recursos.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold px-6">
+                  <Link to="/contacto">Contáctanos Hoy</Link>
+                </Button>
+                <Button asChild className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold px-6">
+                  <Link to="/contacto">Solicita una Cotización</Link>
+                </Button>
+              </div>
             </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <WaveDivider from="bg-background" to="bg-light-bg" />
-
-    {/* Solutions */}
-    <section className="bg-light-bg py-16 md:py-24">
-      <div className="container mx-auto px-4">
-        <h2 className="font-display text-2xl md:text-4xl font-bold text-foreground text-center mb-4">
-          Cómo lo resolvemos
-        </h2>
-        <p className="text-muted-foreground text-center mb-12 max-w-xl mx-auto">
-          Combinamos tecnología, experiencia y respuesta rápida para mantener tus sistemas funcionando.
-        </p>
-        <div className="grid md:grid-cols-3 gap-8">
-          {solutions.map((s, i) => (
-            <motion.div key={s.title} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-              <Card className="h-full border-none shadow-md bg-card">
-                <CardContent className="p-8">
-                  <div className="w-14 h-14 rounded-xl bg-cta/10 flex items-center justify-center mb-5">
-                    <s.icon className="h-7 w-7 text-cta" />
+            <div className="hidden md:flex justify-center">
+              <div className="relative">
+                <Droplets className="h-48 w-48 text-primary-foreground/20" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-32 h-32 rounded-full bg-primary-foreground/10 backdrop-blur-sm flex items-center justify-center">
+                    <Droplets className="h-16 w-16 text-primary-foreground/60" />
                   </div>
-                  <h3 className="font-display font-semibold text-xl text-card-foreground mb-3">{s.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{s.desc}</p>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    {/* Stats */}
-    <section className="bg-accent py-14">
-      <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-3 gap-8 text-center">
-          {stats.map((s) => (
-            <div key={s.label} className="flex flex-col items-center">
-              <s.icon className="h-8 w-8 text-accent-foreground/80 mb-3" />
-              <span className="font-display text-3xl md:text-4xl font-bold text-accent-foreground">{s.value}</span>
-              <span className="text-accent-foreground/80 mt-1">{s.label}</span>
+                </div>
+              </div>
             </div>
-          ))}
+          </div>
         </div>
-      </div>
-    </section>
+        {/* Bottom wave */}
+        <div className="absolute bottom-0 left-0 right-0">
+          <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-10 md:h-16" preserveAspectRatio="none">
+            <path d="M0 40C240 80 480 0 720 40C960 80 1200 0 1440 40V80H0V40Z" className="fill-background" />
+          </svg>
+        </div>
+      </section>
 
-    <CTABanner />
-    <Footer />
-  </>
-);
+      {/* Problems */}
+      <section className="bg-background py-16 md:py-24">
+        <div className="container mx-auto px-4">
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground text-center mb-12 tracking-wide">
+            ¿TE ENFRENTAS A ESTOS PROBLEMAS?
+          </h2>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            {problems.map((p, i) => (
+              <motion.div key={p.title} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center">
+                <div className="w-16 h-16 rounded-full border-2 border-primary/30 flex items-center justify-center mx-auto mb-4">
+                  <p.icon className="h-7 w-7 text-primary" />
+                </div>
+                <h3 className="font-display font-bold text-sm text-foreground mb-1 tracking-wide">{p.title}</h3>
+                <p className="text-xs text-muted-foreground">{p.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Solutions — teal gradient band */}
+      <section className="relative" style={{ background: "linear-gradient(135deg, hsl(195, 60%, 25%) 0%, hsl(190, 50%, 35%) 50%, hsl(185, 55%, 50%) 100%)" }}>
+        <div className="absolute top-0 left-0 right-0">
+          <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-8 md:h-12" preserveAspectRatio="none">
+            <path d="M0 30C360 60 720 0 1080 30C1260 50 1440 30 1440 30V0H0V30Z" className="fill-background" />
+          </svg>
+        </div>
+        <div className="container mx-auto px-4 py-20 md:py-24 text-center relative z-10">
+          <p className="text-primary-foreground/70 text-sm tracking-widest mb-2 uppercase">En BioAgua Chile</p>
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-primary-foreground mb-3 tracking-wide">
+            RESOLVEMOS TODO POR TI
+          </h2>
+          <p className="text-primary-foreground/70 mb-10">Llámanos ahora para una inspección gratuita.</p>
+          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            {solutions.map((s, i) => (
+              <motion.div key={s.title} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+                <Card className="h-full bg-primary-foreground/10 border border-primary-foreground/20 backdrop-blur-sm">
+                  <CardContent className="p-6 text-center">
+                    <s.icon className="h-8 w-8 text-primary-foreground/80 mx-auto mb-4" />
+                    <p className="text-sm text-primary-foreground font-medium leading-relaxed">{s.title}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0">
+          <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-8 md:h-12" preserveAspectRatio="none">
+            <path d="M0 30C360 0 720 60 1080 30C1260 10 1440 30 1440 30V60H0V30Z" className="fill-background" />
+          </svg>
+        </div>
+      </section>
+
+      {/* Why Choose Us */}
+      <section className="bg-background py-16 md:py-24">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-3 tracking-wide">
+            ¿POR QUÉ ELEGIRNOS?
+          </h2>
+          <p className="text-muted-foreground mb-12 max-w-xl mx-auto text-sm">
+            Contamos con un equipo técnico experto en calderas, bombas y sistemas hidráulicos.
+          </p>
+          <div className="grid grid-cols-3 gap-8 max-w-3xl mx-auto">
+            {[
+              { value: "1", label: "Años de Garantía" },
+              { value: "5/7", label: "Atención Continua" },
+              { value: "11+", label: "Comunidades y Empresas\nconfían en Nosotros" },
+            ].map((stat, i) => (
+              <motion.div key={stat.label} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="flex flex-col items-center">
+                <span className="font-display text-4xl md:text-5xl font-bold text-primary">{stat.value}</span>
+                <span className="text-xs text-muted-foreground mt-2 whitespace-pre-line">{stat.label}</span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Cases of Success */}
+      <section className="bg-light-bg py-16 md:py-24">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-12 tracking-wide">
+            CASOS DE ÉXITO
+          </h2>
+          <div className="relative max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-8">
+              {cases.map((c, i) => (
+                <motion.div key={c.name} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+                  <div className="text-center">
+                    <p className="text-primary font-semibold text-sm mb-3">{c.name}</p>
+                    <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                      <c.icon className="h-7 w-7 text-primary" />
+                    </div>
+                    <h3 className="font-display font-bold text-foreground text-sm md:text-base mb-2 tracking-wide">{c.stat}</h3>
+                    <p className="text-xs text-muted-foreground">{c.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+            {/* Navigation arrows */}
+            <button className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-10 h-10 rounded-full border border-border bg-background flex items-center justify-center hover:bg-muted transition-colors">
+              <ChevronLeft className="h-5 w-5 text-muted-foreground" />
+            </button>
+            <button className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-10 h-10 rounded-full border border-border bg-background flex items-center justify-center hover:bg-muted transition-colors">
+              <ChevronRight className="h-5 w-5 text-muted-foreground" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <CTABanner />
+      <Footer />
+    </>
+  );
+};
 
 export default Index;
