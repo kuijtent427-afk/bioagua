@@ -33,7 +33,7 @@ const Testimonials = () => (
       <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
         {testimonials.map((t, i) => (
           <motion.div
-            key={t.name}
+            key={i}
             className="relative bg-card border border-border/50 rounded-xl p-8 pl-10 hover:border-primary/30 hover:shadow-lg transition-all duration-300"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -44,13 +44,9 @@ const Testimonials = () => (
             {/* Accent left border */}
             <div className="absolute left-0 top-6 bottom-6 w-1 rounded-full bg-primary/60" />
             <Quote className="h-6 w-6 text-primary/30 mb-4" />
-            <p className="text-sm text-muted-foreground leading-relaxed mb-6 italic">
+            <p className="text-sm text-muted-foreground leading-relaxed italic">
               "{t.quote}"
             </p>
-            <div>
-              <p className="font-semibold text-sm text-foreground">{t.name}</p>
-              <p className="text-xs text-primary">{t.company}</p>
-            </div>
           </motion.div>
         ))}
       </div>
