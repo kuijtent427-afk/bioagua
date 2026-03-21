@@ -1,51 +1,77 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MessageCircle } from "lucide-react";
+import { motion } from "framer-motion";
 import logo from "@/assets/logo.png";
+
+const staggerContainer = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.15 } },
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
+};
 
 const Footer = () => (
   <footer className="bg-secondary text-secondary-foreground">
     <div className="container mx-auto px-4 py-12">
-      <div className="grid md:grid-cols-3 gap-8">
-        <div>
+      <motion.div
+        className="grid md:grid-cols-3 gap-8"
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <motion.div variants={fadeUp}>
           <div className="flex items-center gap-2 mb-4">
             <img src={logo} alt="BioAgua Chile" className="h-10 w-auto brightness-0 invert" />
           </div>
           <p className="text-sm text-secondary-foreground/70 leading-relaxed">
             Mantención, optimización e instalación de sistemas de agua para condominios y empresas.
           </p>
-        </div>
+        </motion.div>
 
-        <div>
+        <motion.div variants={fadeUp}>
           <h4 className="font-display font-semibold mb-4 text-sm tracking-wider">ENLACES</h4>
           <div className="flex flex-col gap-2 text-sm text-secondary-foreground/70">
-            <Link to="/" className="hover:text-accent transition-colors">Inicio</Link>
-            <Link to="/nosotros" className="hover:text-accent transition-colors">Nosotros</Link>
-            <Link to="/empresas" className="hover:text-accent transition-colors">Empresas</Link>
-            <Link to="/condominios" className="hover:text-accent transition-colors">Condominios</Link>
-            <Link to="/contacto" className="hover:text-accent transition-colors">Contacto</Link>
+            {[
+              { to: "/", label: "Inicio" },
+              { to: "/nosotros", label: "Nosotros" },
+              { to: "/empresas", label: "Empresas" },
+              { to: "/condominios", label: "Condominios" },
+              { to: "/contacto", label: "Contacto" },
+            ].map((link) => (
+              <motion.div key={link.to} whileHover={{ x: 4, transition: { duration: 0.2 } }}>
+                <Link to={link.to} className="hover:text-accent transition-colors story-link">
+                  {link.label}
+                </Link>
+              </motion.div>
+            ))}
           </div>
-        </div>
+        </motion.div>
 
-        <div>
+        <motion.div variants={fadeUp}>
           <h4 className="font-display font-semibold mb-4 text-sm tracking-wider">CONTACTO</h4>
           <div className="flex flex-col gap-3 text-sm text-secondary-foreground/70">
-            <a href="tel:+56925835616" className="flex items-center gap-2 hover:text-accent transition-colors">
+            <motion.a href="tel:+56925835616" className="flex items-center gap-2 hover:text-accent transition-colors" whileHover={{ x: 4, transition: { duration: 0.2 } }}>
               <Phone className="h-4 w-4" /> +56 9 2583 5616
-            </a>
-            <a href="mailto:bioagua@gmail.com" className="flex items-center gap-2 hover:text-accent transition-colors">
+            </motion.a>
+            <motion.a href="mailto:bioagua@gmail.com" className="flex items-center gap-2 hover:text-accent transition-colors" whileHover={{ x: 4, transition: { duration: 0.2 } }}>
               <Mail className="h-4 w-4" /> bioagua@gmail.com
-            </a>
-            <a
+            </motion.a>
+            <motion.a
               href="https://wa.me/56925835836"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 hover:text-accent transition-colors"
+              whileHover={{ x: 4, transition: { duration: 0.2 } }}
             >
               <MessageCircle className="h-4 w-4" /> WhatsApp
-            </a>
+            </motion.a>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       <div className="border-t border-secondary-foreground/20 mt-8 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
         <p className="text-xs text-secondary-foreground/50">
