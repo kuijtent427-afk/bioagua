@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import AdminMessages from "@/components/admin/AdminMessages";
+import ChangePassword from "@/components/admin/ChangePassword";
 import logo from "@/assets/logo.png";
 
 const AdminDashboard = () => {
@@ -88,6 +89,11 @@ const AdminDashboard = () => {
 
         {/* Messages */}
         <AdminMessages />
+
+        {/* Change password */}
+        <div className="mt-8">
+          <ChangePassword />
+        </div>
       </main>
     </div>
   );
