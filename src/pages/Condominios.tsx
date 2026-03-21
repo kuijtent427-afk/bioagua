@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, AlertTriangle, DollarSign, Droplets, Siren, Wrench, Zap, Shield, Clock, Users, TrendingDown } from "lucide-react";
+import { ArrowRight, MessageSquareWarning, ThermometerSun, Moon, RotateCcw, Wrench, Shield, Clock, TrendingDown, Zap } from "lucide-react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -14,69 +14,61 @@ const fadeUp = {
 };
 
 const problems = [
-  { icon: AlertTriangle, title: "Fallas constantes", desc: "Equipos que se detienen sin aviso, afectando la operación diaria." },
-  { icon: DollarSign, title: "Altos costos", desc: "Facturas de agua y gas que crecen sin control mes a mes." },
-  { icon: Droplets, title: "Incrustaciones (sarro)", desc: "Depósitos minerales que reducen eficiencia y dañan equipos." },
-  { icon: Siren, title: "Emergencias", desc: "Cortes inesperados y urgencias que generan estrés y costos extras." },
+  { icon: MessageSquareWarning, title: "Reclamos de vecinos", desc: "Quejas constantes por falta de agua caliente, presión baja o cortes inesperados." },
+  { icon: ThermometerSun, title: "Cortes de agua y calefacción", desc: "Fallas en calderas y bombas que dejan al edificio sin servicio." },
+  { icon: Moon, title: "Emergencias nocturnas", desc: "Problemas que no avisan y generan urgencias fuera de horario." },
+  { icon: RotateCcw, title: "Gastos repetitivos", desc: "Reparaciones que se repiten porque nadie aborda la causa raíz." },
 ];
 
 const solutions = [
-  { icon: Wrench, title: "Mantención preventiva y correctiva", desc: "Evitamos fallas antes de que ocurran con planes de mantención programada." },
-  { icon: Shield, title: "Ionizadores anti-sarro", desc: "Tecnología que elimina incrustaciones y extiende la vida útil de tus equipos." },
-  { icon: Zap, title: "Optimización energética", desc: "Reducimos tu consumo de agua y gas con ajustes técnicos medibles." },
+  { icon: Wrench, title: "Mantención preventiva", desc: "Planes programados que evitan el 80% de las emergencias. Menos llamadas de vecinos, más tranquilidad." },
+  { icon: Shield, title: "Reducción de sarro", desc: "Ionizadores que protegen calderas y tuberías, extendiendo su vida útil y reduciendo costos de gas." },
+  { icon: Clock, title: "Soporte 24/7", desc: "Equipo técnico disponible las 24 horas. Respuesta en menos de 2 horas ante cualquier emergencia." },
 ];
 
 const stats = [
-  { icon: TrendingDown, value: "Hasta 40%", label: "ahorro en costos de agua y energía" },
-  { icon: Clock, value: "< 2 horas", label: "tiempo de respuesta ante emergencias" },
-  { icon: Users, value: "+50", label: "clientes confían en nosotros" },
+  { icon: TrendingDown, value: "Hasta 30%", label: "ahorro en gas con mantención preventiva" },
+  { icon: Zap, value: "< 2 horas", label: "respuesta ante emergencias" },
+  { icon: Shield, value: "80%", label: "menos emergencias con plan preventivo" },
 ];
 
-const Index = () => (
+const Condominios = () => (
   <>
     <Navbar />
 
-    {/* Hero */}
     <section className="bg-primary relative overflow-hidden">
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 right-10 w-72 h-72 rounded-full bg-accent blur-3xl" />
-        <div className="absolute bottom-10 left-20 w-96 h-96 rounded-full bg-cta blur-3xl" />
+        <div className="absolute bottom-10 left-10 w-80 h-80 rounded-full bg-cta blur-3xl" />
       </div>
       <div className="container mx-auto px-4 py-20 md:py-32 relative z-10">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-3xl">
           <h1 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-primary-foreground leading-tight mb-6">
-            Reduce fallas, costos y consumo en tus sistemas de agua
+            Evita reclamos, emergencias y costos innecesarios en tu comunidad
           </h1>
           <p className="text-lg md:text-xl text-primary-foreground/80 mb-8 max-w-2xl">
-            Optimizamos calderas, bombas y sistemas hidráulicos para condominios y empresas en todo Chile.
+            Mantención profesional de calderas, bombas y sistemas de agua para condominios. Respuesta rápida, resultados medibles.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Button asChild size="lg" className="bg-cta text-cta-foreground hover:bg-cta/90 font-semibold text-base px-8">
-              <Link to="/contacto">Agenda evaluación gratuita <ArrowRight className="ml-2 h-5 w-5" /></Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 font-semibold text-base px-8">
-              <Link to="/contacto">Solicita una cotización</Link>
-            </Button>
-          </div>
+          <Button asChild size="lg" className="bg-cta text-cta-foreground hover:bg-cta/90 font-semibold text-base px-8">
+            <Link to="/contacto">Agenda revisión técnica gratuita <ArrowRight className="ml-2 h-5 w-5" /></Link>
+          </Button>
         </motion.div>
       </div>
     </section>
 
     <WaveDivider from="bg-primary" to="bg-background" />
 
-    {/* Problems */}
     <section className="bg-background py-16 md:py-24">
       <div className="container mx-auto px-4">
         <h2 className="font-display text-2xl md:text-4xl font-bold text-foreground text-center mb-4">
-          ¿Te suena familiar?
+          Problemas comunes en condominios
         </h2>
         <p className="text-muted-foreground text-center mb-12 max-w-xl mx-auto">
-          Estos problemas afectan a cientos de condominios y empresas. La buena noticia: tienen solución.
+          Si administras un condominio, probablemente conoces estos dolores de cabeza.
         </p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {problems.map((p, i) => (
             <motion.div key={p.title} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-              <Card className="h-full border-none shadow-md hover:shadow-lg transition-shadow bg-card">
+              <Card className="h-full border-none shadow-md bg-card">
                 <CardContent className="p-6 text-center">
                   <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center mx-auto mb-4">
                     <p.icon className="h-7 w-7 text-accent" />
@@ -93,15 +85,11 @@ const Index = () => (
 
     <WaveDivider from="bg-background" to="bg-light-bg" />
 
-    {/* Solutions */}
     <section className="bg-light-bg py-16 md:py-24">
       <div className="container mx-auto px-4">
-        <h2 className="font-display text-2xl md:text-4xl font-bold text-foreground text-center mb-4">
-          Cómo lo resolvemos
+        <h2 className="font-display text-2xl md:text-4xl font-bold text-foreground text-center mb-12">
+          Cómo ayudamos a tu condominio
         </h2>
-        <p className="text-muted-foreground text-center mb-12 max-w-xl mx-auto">
-          Combinamos tecnología, experiencia y respuesta rápida para mantener tus sistemas funcionando.
-        </p>
         <div className="grid md:grid-cols-3 gap-8">
           {solutions.map((s, i) => (
             <motion.div key={s.title} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
@@ -135,9 +123,9 @@ const Index = () => (
       </div>
     </section>
 
-    <CTABanner />
+    <CTABanner title="Agenda una revisión técnica gratuita" subtitle="Evaluamos el estado de tus sistemas y te entregamos un diagnóstico sin costo." buttonText="Agendar revisión" />
     <Footer />
   </>
 );
 
-export default Index;
+export default Condominios;
