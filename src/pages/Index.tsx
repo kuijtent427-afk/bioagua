@@ -7,7 +7,7 @@ import { useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTABanner from "@/components/CTABanner";
-import heroImage from "@/assets/hero-water.png";
+import heroImage from "@/assets/hero-header.png";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -88,11 +88,11 @@ const Index = () => {
       <motion.section
         ref={heroRef}
         className="relative overflow-hidden min-h-[500px] md:min-h-[600px]"
-        style={{ background: "linear-gradient(135deg, hsl(195, 60%, 88%) 0%, hsl(190, 55%, 78%) 30%, hsl(185, 50%, 68%) 60%, hsl(180, 45%, 62%) 100%)" }}
       >
-        {/* Hero image behind content */}
-        <div className="absolute inset-0 flex items-center justify-end pointer-events-none overflow-hidden">
-          <img src={heroImage} alt="" aria-hidden="true" style={{ transform: "scale(1.5)" }} className="h-auto w-auto max-h-full origin-center" />
+        {/* Hero background image */}
+        <div className="absolute inset-0">
+          <img src={heroImage} alt="" aria-hidden="true" className="w-full h-full object-cover" />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, hsl(195, 60%, 88%, 0.55) 0%, hsl(190, 55%, 78%, 0.4) 30%, transparent 60%)" }} />
         </div>
 
         {/* Animated floating shapes */}
@@ -119,7 +119,7 @@ const Index = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             >
-              BIOAGUA <span className="font-light text-foreground">CHILE</span>
+              BIOAGUA
             </motion.h1>
             <motion.p
               className="text-secondary/70 mb-8 max-w-lg"
@@ -204,7 +204,7 @@ const Index = () => {
             className="text-primary-foreground/60 text-xs tracking-widest mb-2 uppercase"
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={slideInLeft}
           >
-            En BioAgua Chile
+            En BioAgua
           </motion.p>
           <motion.h2
             className="font-display text-2xl md:text-3xl font-bold text-primary-foreground mb-3 tracking-wide"
