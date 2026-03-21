@@ -110,10 +110,6 @@ const Index = () => {
           </svg>
         </div>
       </motion.section>
-
-      {/* Client Trust Bar */}
-      <ClientLogos />
-
       {/* Problems */}
       <section className="bg-background py-20 md:py-28">
         <div className="container mx-auto px-4">
