@@ -34,15 +34,21 @@ const slideInRight = {
 };
 
 const problems = [
-  { icon: AlertTriangle, title: "Fallos recurrentes", desc: "En torres de enfriamiento y condensadores." },
-  { icon: DollarSign, title: "Altos costos", desc: "De gas y agua por equipos ineficientes." },
-  { icon: Droplets, title: "Incrustaciones", desc: "En calderas y tuberías." },
+  { key: "faults", icon: AlertTriangle, title: "Fallos recurrentes", desc: "En torres de enfriamiento y condensadores." },
+  { key: "costs", icon: DollarSign, title: "Altos costos", desc: "De gas y agua por equipos ineficientes." },
+  { key: "scale", icon: Droplets, title: "Incrustaciones", desc: "En calderas y tuberías." },
 ];
 
 const trustCards = [
-  { icon: Zap, title: "TECNOLOGÍA DE PUNTA", desc: "Que ahorra hasta un 40% en costos operativos." },
-  { icon: Shield, title: "EXPERIENCIA", desc: "En industrias como alimentos, salud y manufactura." },
-  { icon: Clock, title: "GARANTÍA Y SOPORTE", desc: "Garantías extendidas y soporte técnico continuo." },
+  { key: "tech", icon: Zap, title: "TECNOLOGÍA DE PUNTA", desc: "Que ahorra hasta un 40% en costos operativos." },
+  { key: "experience", icon: Shield, title: "EXPERIENCIA", desc: "En industrias como alimentos, salud y manufactura." },
+  { key: "warranty", icon: Clock, title: "GARANTÍA Y SOPORTE", desc: "Garantías extendidas y soporte técnico continuo." },
+];
+
+const solutionItems = [
+  { key: "install", title: "INSTALAMOS", desc: "Ionizadores que eliminan sarro y prolongan la vida útil de tus equipos." },
+  { key: "maintain", title: "MANTENEMOS", desc: "Tus calderas y sistemas operativos al 100%." },
+  { key: "design", title: "DISEÑAMOS", desc: "Soluciones personalizadas para tu industria." },
 ];
 
 const Empresas = () => {
@@ -119,12 +125,12 @@ const Empresas = () => {
           </motion.div>
           <motion.div className="grid md:grid-cols-3 gap-10 max-w-3xl mx-auto" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
             {problems.map((p, i) => (
-              <motion.div key={p.title} custom={i} variants={scaleIn} whileHover={{ y: -8 }} className="text-center cursor-default">
+              <motion.div key={p.key} custom={i} variants={scaleIn} whileHover={{ y: -8 }} className="text-center cursor-default">
                 <motion.div className="w-20 h-20 rounded-full border-2 border-primary/20 flex items-center justify-center mx-auto mb-4 bg-light-bg" whileHover={{ scale: 1.1 }}>
                   <p.icon className="h-8 w-8 text-primary" />
                 </motion.div>
-                <h3 className="font-display font-bold text-sm text-foreground mb-1">{p.title}</h3>
-                <p className="text-xs text-muted-foreground">{p.desc}</p>
+                <EditableText contentKey={`empresas__problems__${p.key}_title`} defaultValue={p.title} as="h3" className="font-display font-bold text-sm text-foreground mb-1" />
+                <EditableText contentKey={`empresas__problems__${p.key}_desc`} defaultValue={p.desc} as="p" className="text-xs text-muted-foreground" />
               </motion.div>
             ))}
           </motion.div>
@@ -141,19 +147,15 @@ const Empresas = () => {
         <div className="container mx-auto px-4 py-24 md:py-28 relative z-10">
           <div className="grid md:grid-cols-2 gap-12 items-center max-w-4xl mx-auto">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={slideInLeft}>
-              <p className="text-primary-foreground/60 text-xs tracking-widest uppercase font-semibold mb-2">Nuestras Soluciones</p>
-              <h3 className="font-display text-2xl font-bold text-primary-foreground mb-6">¿QUÉ HACEMOS POR TU EMPRESA?</h3>
+              <EditableText contentKey="empresas__solutions__subtitle" defaultValue="Nuestras Soluciones" as="p" className="text-primary-foreground/60 text-xs tracking-widest uppercase font-semibold mb-2" />
+              <EditableText contentKey="empresas__solutions__title" defaultValue="¿QUÉ HACEMOS POR TU EMPRESA?" as="h3" className="font-display text-2xl font-bold text-primary-foreground mb-6" />
               <div className="space-y-4">
-                {[
-                  { title: "INSTALAMOS", desc: "Ionizadores que eliminan sarro y prolongan la vida útil de tus equipos." },
-                  { title: "MANTENEMOS", desc: "Tus calderas y sistemas operativos al 100%." },
-                  { title: "DISEÑAMOS", desc: "Soluciones personalizadas para tu industria." },
-                ].map((item) => (
-                  <motion.div key={item.title} className="flex items-start gap-3 bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/20 rounded-xl p-4 hover:bg-primary-foreground/15 transition-colors duration-300" whileHover={{ x: 6 }}>
+                {solutionItems.map((item) => (
+                  <motion.div key={item.key} className="flex items-start gap-3 bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/20 rounded-xl p-4 hover:bg-primary-foreground/15 transition-colors duration-300" whileHover={{ x: 6 }}>
                     <CheckCircle className="h-5 w-5 text-primary-foreground/80 mt-0.5 shrink-0" />
                     <div>
-                      <p className="font-semibold text-sm text-primary-foreground">{item.title}</p>
-                      <p className="text-xs text-primary-foreground/70">{item.desc}</p>
+                      <EditableText contentKey={`empresas__solutions__${item.key}_title`} defaultValue={item.title} as="p" className="font-semibold text-sm text-primary-foreground" />
+                      <EditableText contentKey={`empresas__solutions__${item.key}_desc`} defaultValue={item.desc} as="p" className="text-xs text-primary-foreground/70" />
                     </div>
                   </motion.div>
                 ))}
@@ -177,20 +179,20 @@ const Empresas = () => {
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={slideInLeft}>
             <EditableText contentKey="empresas__trust__title" defaultValue="¿POR QUÉ CONFIAR EN NOSOTROS?" as="h2" className="font-display text-2xl md:text-3xl font-bold text-foreground text-center mb-3 tracking-wide" />
           </motion.div>
-          <motion.p className="text-muted-foreground text-sm text-center mb-14 max-w-lg mx-auto" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2, duration: 0.6 }}>
-            Respaldamos cada proyecto con tecnología, experiencia y compromiso.
-          </motion.p>
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2, duration: 0.6 }}>
+            <EditableText contentKey="empresas__trust__description" defaultValue="Respaldamos cada proyecto con tecnología, experiencia y compromiso." as="p" className="text-muted-foreground text-sm text-center mb-14 max-w-lg mx-auto" />
+          </motion.div>
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {trustCards.map((c, i) => (
-              <motion.div key={c.title} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} whileHover={{ y: -6, scale: 1.03 }}>
+              <motion.div key={c.key} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} whileHover={{ y: -6, scale: 1.03 }}>
                 <Card className="h-full border border-border shadow-sm bg-card rounded-xl hover:border-primary/30 hover:shadow-lg transition-all duration-300">
                   <CardContent className="p-6 flex items-start gap-4">
                     <motion.div className="w-12 h-12 rounded-full border-2 border-primary/20 flex items-center justify-center shrink-0 bg-light-bg" whileHover={{ rotate: [0, -10, 10, 0] }}>
                       <c.icon className="h-5 w-5 text-primary" />
                     </motion.div>
                     <div>
-                      <h3 className="font-display font-bold text-sm text-foreground mb-1">{c.title}</h3>
-                      <p className="text-xs text-muted-foreground">{c.desc}</p>
+                      <EditableText contentKey={`empresas__trust__${c.key}_title`} defaultValue={c.title} as="h3" className="font-display font-bold text-sm text-foreground mb-1" />
+                      <EditableText contentKey={`empresas__trust__${c.key}_desc`} defaultValue={c.desc} as="p" className="text-xs text-muted-foreground" />
                     </div>
                   </CardContent>
                 </Card>

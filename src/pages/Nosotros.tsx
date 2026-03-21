@@ -31,6 +31,18 @@ const slideInRight = {
   visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
 };
 
+const empresaSolutions = [
+  { key: "ionizers", title: "Instalamos ionizadores", desc: "que eliminan sarro y prolongan la vida útil de tus equipos." },
+  { key: "maintain", title: "Mantenemos", desc: "Tus calderas y sistemas operativos al 100%." },
+  { key: "design", title: "Diseñamos", desc: "Soluciones personalizadas para tu industria." },
+];
+
+const condoSolutions = [
+  { key: "repair", title: "Mantenemos y Reparamos", desc: "calderas y bombas para prevenir emergencias" },
+  { key: "install", title: "Instalamos", desc: "Dispositivos que mejoran la calidad del agua y reducen costos." },
+  { key: "support", title: "Soporte Continuo", desc: "24 horas los 7 días de la semana" },
+];
+
 const Nosotros = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
@@ -95,7 +107,7 @@ const Nosotros = () => {
               <motion.img src={logo} alt="BioAgua" className="h-28 w-auto mx-auto" whileHover={{ scale: 1.05 }} />
             </motion.div>
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={slideInRight}>
-              <p className="text-primary text-xs tracking-widest uppercase font-semibold mb-2">Sobre Nosotros</p>
+              <EditableText contentKey="nosotros__about__label" defaultValue="Sobre Nosotros" as="p" className="text-primary text-xs tracking-widest uppercase font-semibold mb-2" />
               <EditableText contentKey="nosotros__about__title" defaultValue="AHORRA TIEMPO Y RECURSOS" as="h3" className="font-display text-2xl font-bold text-foreground mb-4" />
               <EditableText contentKey="nosotros__about__description" defaultValue="Contamos con un equipo técnico experto en calderas, bombas y sistemas hidráulicos. Desde mantenciones hasta instalaciones, optimizamos tus sistemas para que ahorres tiempo, dinero y recursos." as="p" className="text-muted-foreground text-sm leading-relaxed" multiline />
             </motion.div>
@@ -126,19 +138,15 @@ const Nosotros = () => {
         <div className="container mx-auto px-4 py-24 md:py-28 relative z-10">
           <div className="grid md:grid-cols-2 gap-12 items-center max-w-4xl mx-auto">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={slideInLeft}>
-              <p className="text-primary-foreground/60 text-xs tracking-widest uppercase font-semibold mb-2">Soluciones</p>
-              <h3 className="font-display text-2xl font-bold text-primary-foreground mb-6">PARA EMPRESAS</h3>
+              <EditableText contentKey="nosotros__empresas__label" defaultValue="Soluciones" as="p" className="text-primary-foreground/60 text-xs tracking-widest uppercase font-semibold mb-2" />
+              <EditableText contentKey="nosotros__empresas__title" defaultValue="PARA EMPRESAS" as="h3" className="font-display text-2xl font-bold text-primary-foreground mb-6" />
               <div className="space-y-4">
-                {[
-                  { title: "Instalamos ionizadores", desc: "que eliminan sarro y prolongan la vida útil de tus equipos." },
-                  { title: "Mantenemos", desc: "Tus calderas y sistemas operativos al 100%." },
-                  { title: "Diseñamos", desc: "Soluciones personalizadas para tu industria." },
-                ].map((item) => (
-                  <motion.div key={item.title} className="flex items-start gap-3 bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/20 rounded-xl p-4 hover:bg-primary-foreground/15 transition-colors duration-300" whileHover={{ x: 6 }}>
+                {empresaSolutions.map((item) => (
+                  <motion.div key={item.key} className="flex items-start gap-3 bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/20 rounded-xl p-4 hover:bg-primary-foreground/15 transition-colors duration-300" whileHover={{ x: 6 }}>
                     <CheckCircle className="h-5 w-5 text-primary-foreground/80 mt-0.5 shrink-0" />
                     <div>
-                      <p className="font-semibold text-sm text-primary-foreground">{item.title}</p>
-                      <p className="text-xs text-primary-foreground/70">{item.desc}</p>
+                      <EditableText contentKey={`nosotros__empresas__${item.key}_title`} defaultValue={item.title} as="p" className="font-semibold text-sm text-primary-foreground" />
+                      <EditableText contentKey={`nosotros__empresas__${item.key}_desc`} defaultValue={item.desc} as="p" className="text-xs text-primary-foreground/70" />
                     </div>
                   </motion.div>
                 ))}
@@ -164,19 +172,15 @@ const Nosotros = () => {
               <motion.img src={calefaccionImg} alt="Calefacción doméstica" className="w-48 h-48 object-contain" whileHover={{ scale: 1.08 }} />
             </motion.div>
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={slideInRight} className="md:order-2">
-              <p className="text-primary text-xs tracking-widest uppercase font-semibold mb-2">Soluciones</p>
-              <h3 className="font-display text-2xl font-bold text-foreground mb-6">PARA CONDOMINIOS</h3>
+              <EditableText contentKey="nosotros__condominios__label" defaultValue="Soluciones" as="p" className="text-primary text-xs tracking-widest uppercase font-semibold mb-2" />
+              <EditableText contentKey="nosotros__condominios__title" defaultValue="PARA CONDOMINIOS" as="h3" className="font-display text-2xl font-bold text-foreground mb-6" />
               <div className="space-y-4">
-                {[
-                  { title: "Mantenemos y Reparamos", desc: "calderas y bombas para prevenir emergencias" },
-                  { title: "Instalamos", desc: "Dispositivos que mejoran la calidad del agua y reducen costos." },
-                  { title: "Soporte Continuo", desc: "24 horas los 7 días de la semana" },
-                ].map((item) => (
-                  <motion.div key={item.title} className="flex items-start gap-3 border border-border rounded-xl p-4 hover:border-primary/30 hover:shadow-lg transition-all duration-300" whileHover={{ y: -4 }}>
+                {condoSolutions.map((item) => (
+                  <motion.div key={item.key} className="flex items-start gap-3 border border-border rounded-xl p-4 hover:border-primary/30 hover:shadow-lg transition-all duration-300" whileHover={{ y: -4 }}>
                     <CheckCircle className="h-5 w-5 text-primary mt-0.5 shrink-0" />
                     <div>
-                      <p className="font-semibold text-sm text-foreground">{item.title}</p>
-                      <p className="text-xs text-muted-foreground">{item.desc}</p>
+                      <EditableText contentKey={`nosotros__condominios__${item.key}_title`} defaultValue={item.title} as="p" className="font-semibold text-sm text-foreground" />
+                      <EditableText contentKey={`nosotros__condominios__${item.key}_desc`} defaultValue={item.desc} as="p" className="text-xs text-muted-foreground" />
                     </div>
                   </motion.div>
                 ))}

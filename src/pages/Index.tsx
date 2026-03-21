@@ -43,23 +43,23 @@ const slideInRight = {
 };
 
 const problems = [
-  { icon: AlertTriangle, title: "FALLOS CONSTANTES", desc: "en calderas y bombas" },
-  { icon: DollarSign, title: "ALTOS COSTOS", desc: "de reparación y mantenimiento" },
-  { icon: Gauge, title: "EQUIPOS DETERIORADOS", desc: "por sarro y mala calidad del agua" },
-  { icon: Droplets, title: "ALTOS CONSUMOS", desc: "de agua, gas y energía" },
+  { key: "faults", icon: AlertTriangle, title: "FALLOS CONSTANTES", desc: "en calderas y bombas" },
+  { key: "costs", icon: DollarSign, title: "ALTOS COSTOS", desc: "de reparación y mantenimiento" },
+  { key: "deterioration", icon: Gauge, title: "EQUIPOS DETERIORADOS", desc: "por sarro y mala calidad del agua" },
+  { key: "consumption", icon: Droplets, title: "ALTOS CONSUMOS", desc: "de agua, gas y energía" },
 ];
 
 const solutions = [
-  { icon: Wrench, title: "Mantenciones Correctivas y Preventivas" },
-  { icon: Zap, title: "Instalación de calderas y dispositivos que optimizan tu sistema." },
-  { icon: Leaf, title: "Soluciones sustentables para ahorrar agua, energía y costos." },
+  { key: "maintenance", icon: Wrench, title: "Mantenciones Correctivas y Preventivas" },
+  { key: "installation", icon: Zap, title: "Instalación de calderas y dispositivos que optimizan tu sistema." },
+  { key: "sustainability", icon: Leaf, title: "Soluciones sustentables para ahorrar agua, energía y costos." },
 ];
 
 const useCases = [
-  { icon: Building, title: "CONDOMINIOS Y COMUNIDADES", desc: "Mantención preventiva de calderas, bombas hidroneumáticas y sistemas de agua caliente para edificios residenciales." },
-  { icon: Wrench, title: "EMPRESAS E INDUSTRIAS", desc: "Instalación y optimización de sistemas hidráulicos, ionizadores y equipos de tratamiento de agua para operaciones industriales." },
-  { icon: Droplets, title: "HOTELES Y CLÍNICAS", desc: "Soluciones integrales de agua caliente sanitaria, recirculación y eficiencia energética para alto consumo." },
-  { icon: Zap, title: "EFICIENCIA ENERGÉTICA", desc: "Diagnóstico y mejora del rendimiento de calderas y sistemas térmicos para reducir costos operativos." },
+  { key: "condominios", icon: Building, title: "CONDOMINIOS Y COMUNIDADES", desc: "Mantención preventiva de calderas, bombas hidroneumáticas y sistemas de agua caliente para edificios residenciales." },
+  { key: "empresas", icon: Wrench, title: "EMPRESAS E INDUSTRIAS", desc: "Instalación y optimización de sistemas hidráulicos, ionizadores y equipos de tratamiento de agua para operaciones industriales." },
+  { key: "hoteles", icon: Droplets, title: "HOTELES Y CLÍNICAS", desc: "Soluciones integrales de agua caliente sanitaria, recirculación y eficiencia energética para alto consumo." },
+  { key: "eficiencia", icon: Zap, title: "EFICIENCIA ENERGÉTICA", desc: "Diagnóstico y mejora del rendimiento de calderas y sistemas térmicos para reducir costos operativos." },
 ];
 
 const Index = () => {
@@ -120,12 +120,12 @@ const Index = () => {
           </motion.div>
           <motion.div className="grid grid-cols-2 lg:grid-cols-4 gap-10" variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
             {problems.map((p, i) => (
-              <motion.div key={p.title} custom={i} variants={scaleIn} whileHover={{ y: -8 }} className="text-center cursor-default">
+              <motion.div key={p.key} custom={i} variants={scaleIn} whileHover={{ y: -8 }} className="text-center cursor-default">
                 <motion.div className="w-20 h-20 rounded-full border-2 border-primary/20 flex items-center justify-center mx-auto mb-4 bg-light-bg" whileHover={{ scale: 1.1 }}>
                   <p.icon className="h-8 w-8 text-primary" />
                 </motion.div>
-                <h3 className="font-display font-bold text-sm text-foreground mb-1 tracking-wide">{p.title}</h3>
-                <p className="text-xs text-muted-foreground">{p.desc}</p>
+                <EditableText contentKey={`index__problems__${p.key}_title`} defaultValue={p.title} as="h3" className="font-display font-bold text-sm text-foreground mb-1 tracking-wide" />
+                <EditableText contentKey={`index__problems__${p.key}_desc`} defaultValue={p.desc} as="p" className="text-xs text-muted-foreground" />
               </motion.div>
             ))}
           </motion.div>
@@ -151,11 +151,11 @@ const Index = () => {
           </motion.div>
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {solutions.map((s, i) => (
-              <motion.div key={s.title} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} whileHover={{ y: -6, scale: 1.03 }}>
+              <motion.div key={s.key} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} whileHover={{ y: -6, scale: 1.03 }}>
                 <Card className="h-full bg-primary-foreground/10 border border-primary-foreground/20 backdrop-blur-sm rounded-xl hover:bg-primary-foreground/15 transition-colors duration-300">
                   <CardContent className="p-6 text-center flex flex-col items-center gap-4">
                     <s.icon className="h-8 w-8 text-primary-foreground/70" />
-                    <p className="text-sm text-primary-foreground font-medium leading-relaxed">{s.title}</p>
+                    <EditableText contentKey={`index__solutions__${s.key}`} defaultValue={s.title} as="p" className="text-sm text-primary-foreground font-medium leading-relaxed" />
                   </CardContent>
                 </Card>
               </motion.div>
@@ -204,13 +204,13 @@ const Index = () => {
           </motion.div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
             {useCases.map((uc, i) => (
-              <motion.div key={uc.title} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} whileHover={{ y: -6 }} className="cursor-default">
+              <motion.div key={uc.key} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} whileHover={{ y: -6 }} className="cursor-default">
                 <div className="text-center p-6 rounded-xl glass-card hover:border-primary/30 hover:shadow-lg transition-all duration-300 h-full">
                   <motion.div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4" whileHover={{ scale: 1.15 }}>
                     <uc.icon className="h-7 w-7 text-primary" />
                   </motion.div>
-                  <h3 className="font-display font-bold text-foreground text-sm md:text-base mb-2 tracking-wide">{uc.title}</h3>
-                  <p className="text-xs text-muted-foreground leading-relaxed">{uc.desc}</p>
+                  <EditableText contentKey={`index__usecases__${uc.key}_title`} defaultValue={uc.title} as="h3" className="font-display font-bold text-foreground text-sm md:text-base mb-2 tracking-wide" />
+                  <EditableText contentKey={`index__usecases__${uc.key}_desc`} defaultValue={uc.desc} as="p" className="text-xs text-muted-foreground leading-relaxed" multiline />
                 </div>
               </motion.div>
             ))}
