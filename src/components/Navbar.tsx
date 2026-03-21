@@ -4,11 +4,11 @@ import { Menu, X, Droplets } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
-  { to: "/", label: "Inicio" },
-  { to: "/nosotros", label: "Nosotros" },
-  { to: "/empresas", label: "Empresas" },
-  { to: "/condominios", label: "Condominios" },
-  { to: "/contacto", label: "Contacto" },
+  { to: "/", label: "INICIO" },
+  { to: "/nosotros", label: "NOSOTROS" },
+  { to: "/empresas", label: "EMPRESAS" },
+  { to: "/condominios", label: "CONDOMINIOS" },
+  { to: "/contacto", label: "CONTACTO" },
 ];
 
 const Navbar = () => {
@@ -16,55 +16,51 @@ const Navbar = () => {
   const location = useLocation();
 
   return (
-    <nav className="sticky top-0 z-50 bg-primary/95 backdrop-blur-md border-b border-secondary">
+    <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border shadow-sm">
       <div className="container mx-auto flex items-center justify-between h-16 px-4">
-        <Link to="/" className="flex items-center gap-2 text-primary-foreground">
-          <Droplets className="h-7 w-7 text-cta" />
-          <span className="font-display text-xl font-bold tracking-tight">BioAgua Chile</span>
+        <Link to="/" className="flex items-center gap-2">
+          <Droplets className="h-8 w-8 text-primary" />
+          <span className="font-display text-xl font-bold tracking-tight text-secondary">BIOAGUA</span>
         </Link>
 
         {/* Desktop */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-8">
           {navLinks.map((l) => (
             <Link
               key={l.to}
               to={l.to}
-              className={`text-sm font-medium transition-colors hover:text-cta ${
-                location.pathname === l.to ? "text-cta" : "text-primary-foreground/80"
+              className={`text-xs font-semibold tracking-wider transition-colors hover:text-primary ${
+                location.pathname === l.to
+                  ? "text-primary border-b-2 border-primary pb-0.5"
+                  : "text-foreground/70"
               }`}
             >
               {l.label}
             </Link>
           ))}
-          <Button asChild className="bg-cta text-cta-foreground hover:bg-cta/90 font-semibold">
-            <Link to="/contacto">Agenda evaluación gratuita</Link>
-          </Button>
         </div>
 
         {/* Mobile toggle */}
-        <button className="md:hidden text-primary-foreground" onClick={() => setOpen(!open)}>
+        <button className="md:hidden text-foreground" onClick={() => setOpen(!open)}>
           {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden bg-primary border-t border-secondary px-4 pb-4">
+        <div className="md:hidden bg-background border-t border-border px-4 pb-4 shadow-lg">
           {navLinks.map((l) => (
             <Link
               key={l.to}
               to={l.to}
               onClick={() => setOpen(false)}
-              className={`block py-3 text-sm font-medium border-b border-secondary/30 ${
-                location.pathname === l.to ? "text-cta" : "text-primary-foreground/80"
+              className={`block py-3 text-sm font-semibold tracking-wider border-b border-border/50 ${
+                location.pathname === l.to ? "text-primary" : "text-foreground/70"
               }`}
             >
               {l.label}
             </Link>
           ))}
-          <Button asChild className="w-full mt-3 bg-cta text-cta-foreground hover:bg-cta/90 font-semibold">
-            <Link to="/contacto" onClick={() => setOpen(false)}>Agenda evaluación gratuita</Link>
-          </Button>
         </div>
       )}
     </nav>
