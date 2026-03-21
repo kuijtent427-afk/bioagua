@@ -29,14 +29,17 @@ const Footer = () => (
         <div>
           <h4 className="font-display font-semibold mb-4 text-sm tracking-wider">CONTACTO</h4>
           <div className="flex flex-col gap-3 text-sm text-secondary-foreground/70">
-            <a href="tel:+56912345678" className="flex items-center gap-2 hover:text-accent transition-colors">
-              <Phone className="h-4 w-4" /> +56 9 1234 5678
+            <a href="tel:+56925835836" className="flex items-center gap-2 hover:text-accent transition-colors">
+              <Phone className="h-4 w-4" /> +56 9 2583 5836
             </a>
-            <a href="mailto:contacto@bioaguachile.cl" className="flex items-center gap-2 hover:text-accent transition-colors">
-              <Mail className="h-4 w-4" /> contacto@bioaguachile.cl
+            <a href="tel:+56925835616" className="flex items-center gap-2 hover:text-accent transition-colors">
+              <Phone className="h-4 w-4" /> +56 9 2583 5616
+            </a>
+            <a href="mailto:bioagua@gmail.com" className="flex items-center gap-2 hover:text-accent transition-colors">
+              <Mail className="h-4 w-4" /> bioagua@gmail.com
             </a>
             <a
-              href="https://wa.me/56912345678"
+              href="https://wa.me/56925835836"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 hover:text-accent transition-colors"

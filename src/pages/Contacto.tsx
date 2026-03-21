@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { MessageCircle, Phone, Clock, Shield, CheckCircle } from "lucide-react";
+import { MessageCircle, Phone, Mail, Clock, Shield, CheckCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
@@ -85,18 +85,32 @@ const Contacto = () => {
                 ¡CONVERSEMOS!
               </h2>
               <div className="space-y-4">
-                <a href="https://wa.me/56925835616" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-secondary hover:text-primary transition-colors">
+                <a href="https://wa.me/56925835836" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-secondary hover:text-primary transition-colors">
                   <MessageCircle className="h-6 w-6" />
                   <div>
-                    <p className="font-semibold text-sm">Whatsapp</p>
-                    <p className="text-sm">+56 9 25835616</p>
+                    <p className="font-semibold text-sm">WhatsApp</p>
+                    <p className="text-sm">+56 9 2583 5836</p>
+                  </div>
+                </a>
+                <a href="tel:+56925835836" className="flex items-center gap-3 text-secondary hover:text-primary transition-colors">
+                  <Phone className="h-6 w-6" />
+                  <div>
+                    <p className="font-semibold text-sm">Teléfono</p>
+                    <p className="text-sm">+56 9 2583 5836</p>
                   </div>
                 </a>
                 <a href="tel:+56925835616" className="flex items-center gap-3 text-secondary hover:text-primary transition-colors">
                   <Phone className="h-6 w-6" />
                   <div>
-                    <p className="font-semibold text-sm">Teléfono</p>
-                    <p className="text-sm">+56 9 25835616</p>
+                    <p className="font-semibold text-sm">Teléfono secundario</p>
+                    <p className="text-sm">+56 9 2583 5616</p>
+                  </div>
+                </a>
+                <a href="mailto:bioagua@gmail.com" className="flex items-center gap-3 text-secondary hover:text-primary transition-colors">
+                  <Mail className="h-6 w-6" />
+                  <div>
+                    <p className="font-semibold text-sm">Email</p>
+                    <p className="text-sm">bioagua@gmail.com</p>
                   </div>
                 </a>
               </div>
