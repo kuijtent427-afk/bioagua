@@ -41,7 +41,7 @@ const Index = () => {
         <div className="absolute inset-0 flex items-center justify-end pr-8 md:pr-16">
           <img src={heroImage} alt="" className="max-h-[70%] w-auto object-contain" aria-hidden="true" />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-[hsl(195,50%,88%)] via-[hsl(195,50%,88%)]/80 to-transparent" />
+        
         <div className="container mx-auto px-4 py-20 md:py-28 relative z-10">
           <div className="max-w-xl">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
