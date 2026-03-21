@@ -52,7 +52,7 @@ const Footer = () => (
           © {new Date().getFullYear()} BioAgua Chile. Todos los derechos reservados.
         </p>
         <div className="flex items-center gap-2">
-          <img src={logo} alt="BioAgua Chile" className="h-8 w-auto" />
+          <img src={logo} alt="BioAgua Chile" className="h-8 w-auto brightness-0 invert" />
         </div>
       </div>
     </div>
