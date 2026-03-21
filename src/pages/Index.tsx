@@ -55,9 +55,11 @@ const solutions = [
   { icon: Leaf, title: "Soluciones sustentables para ahorrar agua, energía y costos." },
 ];
 
-const cases = [
-  { name: "Comunidad Las Palmas", icon: Building, stat: "REDUCCIÓN DEL 40% EN FALLAS DE CALDERAS", desc: "Gracias a nuestras Mantenciones Preventivas." },
-  { name: "Empresas XYZ", icon: Building, stat: "AHORRO DE $30 MILLONES ANUALES", desc: "En consumo energético tras la instalación de Ionizadores." },
+const useCases = [
+  { icon: Building, title: "CONDOMINIOS Y COMUNIDADES", desc: "Mantención preventiva de calderas, bombas hidroneumáticas y sistemas de agua caliente para edificios residenciales." },
+  { icon: Wrench, title: "EMPRESAS E INDUSTRIAS", desc: "Instalación y optimización de sistemas hidráulicos, ionizadores y equipos de tratamiento de agua para operaciones industriales." },
+  { icon: Droplets, title: "HOTELES Y CLÍNICAS", desc: "Soluciones integrales de agua caliente sanitaria, recirculación y eficiencia energética para alto consumo." },
+  { icon: Zap, title: "EFICIENCIA ENERGÉTICA", desc: "Diagnóstico y mejora del rendimiento de calderas y sistemas térmicos para reducir costos operativos." },
 ];
 
 const Index = () => {
@@ -194,27 +196,24 @@ const Index = () => {
       {/* Testimonials */}
       <Testimonials />
 
-      {/* Cases of Success */}
+      {/* Use Cases */}
       <section className="bg-light-bg py-20 md:py-28 overflow-hidden">
         <div className="container mx-auto px-4 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-            <EditableText contentKey="index__cases__title" defaultValue="CASOS DE ÉXITO" as="h2" className="font-display text-2xl md:text-3xl font-bold text-foreground mb-14 tracking-wide" />
+            <EditableText contentKey="index__usecases__title" defaultValue="CASOS DE USO" as="h2" className="font-display text-2xl md:text-3xl font-bold text-foreground mb-14 tracking-wide" />
           </motion.div>
-          <div className="relative max-w-4xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-10">
-              {cases.map((c, i) => (
-                <motion.div key={c.name} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={i === 0 ? slideInLeft : slideInRight} whileHover={{ y: -6 }} className="cursor-default">
-                  <div className="text-center p-6 rounded-xl glass-card hover:border-primary/30 hover:shadow-lg transition-all duration-300">
-                    <p className="text-primary font-semibold text-sm mb-4">{c.name}</p>
-                    <motion.div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4" whileHover={{ scale: 1.15 }}>
-                      <c.icon className="h-7 w-7 text-primary" />
-                    </motion.div>
-                    <h3 className="font-display font-bold text-foreground text-sm md:text-base mb-2 tracking-wide">{c.stat}</h3>
-                    <p className="text-xs text-muted-foreground">{c.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
+            {useCases.map((uc, i) => (
+              <motion.div key={uc.title} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} whileHover={{ y: -6 }} className="cursor-default">
+                <div className="text-center p-6 rounded-xl glass-card hover:border-primary/30 hover:shadow-lg transition-all duration-300 h-full">
+                  <motion.div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4" whileHover={{ scale: 1.15 }}>
+                    <uc.icon className="h-7 w-7 text-primary" />
+                  </motion.div>
+                  <h3 className="font-display font-bold text-foreground text-sm md:text-base mb-2 tracking-wide">{uc.title}</h3>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{uc.desc}</p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
