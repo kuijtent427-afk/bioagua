@@ -91,8 +91,8 @@ const Index = () => {
         style={{ background: "linear-gradient(135deg, hsl(195, 60%, 88%) 0%, hsl(190, 55%, 78%) 30%, hsl(185, 50%, 68%) 60%, hsl(180, 45%, 62%) 100%)" }}
       >
         {/* Hero image behind content */}
-        <div className="absolute inset-0 flex items-center justify-end pointer-events-none">
-          <img src={heroImage} alt="" aria-hidden="true" className="h-auto w-auto max-h-full" />
+        <div className="absolute inset-0 flex items-center justify-end pointer-events-none overflow-hidden">
+          <img src={heroImage} alt="" aria-hidden="true" style={{ transform: "scale(1.5)" }} className="h-auto w-auto max-h-full origin-center" />
         </div>
 
         {/* Animated floating shapes */}
@@ -101,12 +101,6 @@ const Index = () => {
           style={{ background: "radial-gradient(circle, hsl(190, 60%, 50%), transparent)" }}
           animate={{ y: [0, -20, 0], scale: [1, 1.05, 1] }}
           transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute bottom-32 left-10 w-40 h-40 rounded-full opacity-10"
-          style={{ background: "radial-gradient(circle, hsl(195, 50%, 40%), transparent)" }}
-          animate={{ y: [0, 15, 0], scale: [1, 1.08, 1] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         />
 
         <motion.div style={{ y: heroY, opacity: heroOpacity }} className="container mx-auto px-4 py-20 md:py-28 relative z-10">
