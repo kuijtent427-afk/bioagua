@@ -45,7 +45,7 @@ const Contacto = () => {
       name: formData.get("name") as string,
       email: formData.get("email") as string,
       phone: (formData.get("phone") as string) || null,
-      client_type: (formData.get("clientType") as string) || null,
+      client_type: clientType || null,
       subject: (formData.get("subject") as string) || null,
       message: formData.get("message") as string,
     });
