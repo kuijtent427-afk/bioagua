@@ -39,7 +39,7 @@ const Index = () => {
       {/* Hero */}
       <section className="relative overflow-hidden min-h-[500px] md:min-h-[600px]" style={{ background: "linear-gradient(135deg, hsl(195, 50%, 88%) 0%, hsl(195, 40%, 92%) 100%)" }}>
         <div className="absolute inset-0 flex items-center justify-end pr-8 md:pr-16">
-          <img src={heroImage} alt="" className="max-h-[70%] w-auto object-contain" aria-hidden="true" />
+          <img src={heroImage} alt="" className="max-h-[70%] w-auto object-contain mix-blend-multiply" aria-hidden="true" />
         </div>
         
         <div className="container mx-auto px-4 py-20 md:py-28 relative z-10">
