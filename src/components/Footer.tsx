@@ -8,7 +8,7 @@ const Footer = () => (
       <div className="grid md:grid-cols-3 gap-8">
         <div>
           <div className="flex items-center gap-2 mb-4">
-            <img src={logo} alt="BioAgua Chile" className="h-10 w-auto" />
+            <img src={logo} alt="BioAgua Chile" className="h-10 w-auto brightness-0 invert" />
           </div>
           <p className="text-sm text-secondary-foreground/70 leading-relaxed">
             Mantención, optimización e instalación de sistemas de agua para condominios y empresas.
