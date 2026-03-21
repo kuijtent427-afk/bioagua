@@ -88,11 +88,11 @@ const Index = () => {
       <motion.section
         ref={heroRef}
         className="relative overflow-hidden min-h-[500px] md:min-h-[600px]"
-        style={{ background: "linear-gradient(135deg, hsl(195, 60%, 88%) 0%, hsl(190, 55%, 78%) 30%, hsl(185, 50%, 68%) 60%, hsl(180, 45%, 62%) 100%)" }}
       >
-        {/* Hero image behind content */}
-        <div className="absolute inset-0 flex items-center justify-end pointer-events-none overflow-hidden">
-          <img src={heroImage} alt="" aria-hidden="true" style={{ transform: "scale(1.5)" }} className="h-auto w-auto max-h-full origin-center" />
+        {/* Hero background image */}
+        <div className="absolute inset-0">
+          <img src={heroImage} alt="" aria-hidden="true" className="w-full h-full object-cover" />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, hsl(195, 60%, 88%, 0.55) 0%, hsl(190, 55%, 78%, 0.4) 30%, transparent 60%)" }} />
         </div>
 
         {/* Animated floating shapes */}
