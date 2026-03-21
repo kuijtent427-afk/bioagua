@@ -7,6 +7,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTABanner from "@/components/CTABanner";
+import AnimatedCounter from "@/components/AnimatedCounter";
 import EditableText from "@/components/admin/EditableText";
 import { useEditMode } from "@/contexts/EditModeContext";
 import calderaImg from "@/assets/nosotros-caldera.png";
@@ -30,18 +31,6 @@ const slideInRight = {
   visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
 };
 
-const CountUp = ({ value, suffix = "" }: { value: string; suffix?: string }) => (
-  <motion.span
-    className="font-display text-4xl md:text-5xl font-bold text-primary"
-    initial={{ opacity: 0, scale: 0.5 }}
-    whileInView={{ opacity: 1, scale: 1 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-  >
-    {value}{suffix}
-  </motion.span>
-);
-
 const Nosotros = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
@@ -53,12 +42,20 @@ const Nosotros = () => {
     <div className={isEditMode ? "pt-14" : ""}>
       <Navbar />
 
-      {/* Hero */}
+      {/* Hero — dot pattern overlay for distinction */}
       <motion.section
         ref={heroRef}
         className="relative overflow-hidden min-h-[400px] md:min-h-[500px]"
         style={{ background: "linear-gradient(135deg, hsl(195, 60%, 25%) 0%, hsl(190, 50%, 35%) 50%, hsl(185, 55%, 50%) 100%)" }}
       >
+        {/* Dot pattern overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.06]"
+          style={{
+            backgroundImage: "radial-gradient(circle, hsl(0, 0%, 100%) 1px, transparent 1px)",
+            backgroundSize: "20px 20px",
+          }}
+        />
         <motion.div className="absolute top-20 right-20 w-64 h-64 rounded-full opacity-10" style={{ background: "radial-gradient(circle, hsl(190, 60%, 50%), transparent)" }} animate={{ y: [0, -20, 0], scale: [1, 1.05, 1] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} />
         <motion.div className="absolute bottom-16 left-16 w-48 h-48 rounded-full opacity-[0.07]" style={{ background: "radial-gradient(circle, hsl(180, 50%, 60%), transparent)" }} animate={{ y: [0, 15, 0], x: [0, 10, 0] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }} />
 
@@ -111,7 +108,7 @@ const Nosotros = () => {
               { value: "5/7", label: "Atención Continua" },
             ].map((stat, i) => (
               <motion.div key={stat.label} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={scaleIn} className="flex flex-col items-center border-r last:border-r-0 border-border">
-                <CountUp value={stat.value} />
+                <AnimatedCounter value={stat.value} />
                 <span className="text-xs text-muted-foreground mt-2">{stat.label}</span>
               </motion.div>
             ))}
@@ -120,7 +117,7 @@ const Nosotros = () => {
       </section>
 
       {/* Solutions for Empresas */}
-      <section className="relative" style={{ background: "linear-gradient(135deg, hsl(195, 60%, 25%) 0%, hsl(190, 50%, 35%) 50%, hsl(185, 55%, 50%) 100%)" }}>
+      <section className="relative grain-texture" style={{ background: "linear-gradient(135deg, hsl(195, 60%, 25%) 0%, hsl(190, 50%, 35%) 50%, hsl(185, 55%, 50%) 100%)" }}>
         <div className="absolute top-0 left-0 right-0">
           <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-8 md:h-14" preserveAspectRatio="none">
             <path d="M0 30C360 60 720 0 1080 30C1260 50 1440 30 1440 30V0H0V30Z" className="fill-background" />

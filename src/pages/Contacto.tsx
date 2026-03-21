@@ -15,20 +15,10 @@ import CTABanner from "@/components/CTABanner";
 import EditableText from "@/components/admin/EditableText";
 import { useEditMode } from "@/contexts/EditModeContext";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.12, duration: 0.6, ease: [0.22, 1, 0.36, 1] },
-  }),
-};
-
 const scaleIn = {
   hidden: { opacity: 0, scale: 0.8 },
   visible: (i: number) => ({
-    opacity: 1,
-    scale: 1,
+    opacity: 1, scale: 1,
     transition: { delay: i * 0.15, duration: 0.5, ease: [0.22, 1, 0.36, 1] },
   }),
 };
@@ -66,27 +56,27 @@ const Contacto = () => {
     <div className={isEditMode ? "pt-14" : ""}>
       <Navbar />
 
-      {/* Hero */}
+      {/* Hero — compact */}
       <section
         className="relative overflow-hidden"
         style={{ background: "linear-gradient(135deg, hsl(195, 60%, 25%) 0%, hsl(190, 50%, 35%) 50%, hsl(185, 55%, 50%) 100%)" }}
       >
-        <div className="container mx-auto px-4 py-20 md:py-28 relative z-10 text-center">
+        <div className="container mx-auto px-4 py-14 md:py-18 relative z-10 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <EditableText contentKey="contacto__hero__subtitle" defaultValue="Estamos para ayudarte" as="p" className="text-primary-foreground/60 text-xs tracking-widest mb-3 uppercase" />
-            <EditableText contentKey="contacto__hero__title" defaultValue="AGENDA UNA EVALUACIÓN TÉCNICA GRATUITA" as="h1" className="font-display text-3xl md:text-5xl font-bold text-primary-foreground leading-tight" />
-            <EditableText contentKey="contacto__hero__description" defaultValue="Completa el formulario y te contactaremos en menos de 24 horas. Sin compromiso." as="p" className="text-primary-foreground/70 mt-4 max-w-xl mx-auto text-sm" />
+            <EditableText contentKey="contacto__hero__subtitle" defaultValue="Estamos para ayudarte" as="p" className="text-primary-foreground/60 text-xs tracking-widest mb-2 uppercase" />
+            <EditableText contentKey="contacto__hero__title" defaultValue="AGENDA UNA EVALUACIÓN TÉCNICA GRATUITA" as="h1" className="font-display text-2xl md:text-4xl font-bold text-primary-foreground leading-tight" />
+            <EditableText contentKey="contacto__hero__description" defaultValue="Completa el formulario y te contactaremos en menos de 24 horas. Sin compromiso." as="p" className="text-primary-foreground/70 mt-3 max-w-xl mx-auto text-sm" />
           </motion.div>
         </div>
         <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-10 md:h-16" preserveAspectRatio="none">
+          <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-8 md:h-12" preserveAspectRatio="none">
             <path d="M0 40C240 80 480 0 720 40C960 80 1200 0 1440 40V80H0V40Z" className="fill-background" />
           </svg>
         </div>
       </section>
 
       {/* Trust badges */}
-      <section className="bg-background py-16 md:py-20">
+      <section className="bg-background py-12 md:py-16">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
             {[
@@ -105,10 +95,10 @@ const Contacto = () => {
                 className="flex flex-col items-center gap-3 text-center"
               >
                 <motion.div
-                  className="w-16 h-16 rounded-full border-2 border-primary/20 flex items-center justify-center bg-light-bg"
+                  className="w-14 h-14 rounded-full border-2 border-primary/20 flex items-center justify-center bg-light-bg"
                   whileHover={{ scale: 1.1, transition: { duration: 0.3 } }}
                 >
-                  <item.icon className="h-7 w-7 text-primary" />
+                  <item.icon className="h-6 w-6 text-primary" />
                 </motion.div>
                 <p className="text-xs font-semibold text-foreground tracking-wide">{item.label}</p>
               </motion.div>
@@ -145,7 +135,7 @@ const Contacto = () => {
                   href="https://wa.me/56925835836"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 rounded-xl bg-background/60 backdrop-blur-sm border border-border/50 hover:border-primary/30 hover:shadow-md transition-all duration-300"
+                  className="flex items-center gap-4 p-4 rounded-xl glass-card hover:border-primary/30 hover:shadow-md transition-all duration-300"
                   whileHover={{ x: 4, transition: { duration: 0.2 } }}
                 >
                   <div className="w-12 h-12 rounded-full bg-[#25D366]/10 flex items-center justify-center shrink-0">
@@ -158,7 +148,7 @@ const Contacto = () => {
                 </motion.a>
                 <motion.a
                   href="tel:+56925835616"
-                  className="flex items-center gap-4 p-4 rounded-xl bg-background/60 backdrop-blur-sm border border-border/50 hover:border-primary/30 hover:shadow-md transition-all duration-300"
+                  className="flex items-center gap-4 p-4 rounded-xl glass-card hover:border-primary/30 hover:shadow-md transition-all duration-300"
                   whileHover={{ x: 4, transition: { duration: 0.2 } }}
                 >
                   <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
@@ -171,7 +161,7 @@ const Contacto = () => {
                 </motion.a>
                 <motion.a
                   href="mailto:bioagua@gmail.com"
-                  className="flex items-center gap-4 p-4 rounded-xl bg-background/60 backdrop-blur-sm border border-border/50 hover:border-primary/30 hover:shadow-md transition-all duration-300"
+                  className="flex items-center gap-4 p-4 rounded-xl glass-card hover:border-primary/30 hover:shadow-md transition-all duration-300"
                   whileHover={{ x: 4, transition: { duration: 0.2 } }}
                 >
                   <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
