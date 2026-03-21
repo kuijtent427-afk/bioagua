@@ -7,6 +7,7 @@ import { useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTABanner from "@/components/CTABanner";
+import heroImage from "@/assets/hero-water.png";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -89,6 +90,11 @@ const Index = () => {
         className="relative overflow-hidden min-h-[500px] md:min-h-[600px]"
         style={{ background: "linear-gradient(135deg, hsl(195, 60%, 88%) 0%, hsl(190, 55%, 78%) 30%, hsl(185, 50%, 68%) 60%, hsl(180, 45%, 62%) 100%)" }}
       >
+        {/* Hero image behind content */}
+        <div className="absolute inset-0 flex items-center justify-end pointer-events-none">
+          <img src={heroImage} alt="" aria-hidden="true" className="h-auto w-auto max-h-full" />
+        </div>
+
         {/* Animated floating shapes */}
         <motion.div
           className="absolute top-20 right-20 w-64 h-64 rounded-full opacity-10"
