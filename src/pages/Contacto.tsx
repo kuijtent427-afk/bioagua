@@ -92,13 +92,6 @@ const Contacto = () => {
                     <p className="text-sm">+56 9 2583 5836</p>
                   </div>
                 </a>
-                <a href="tel:+56925835836" className="flex items-center gap-3 text-secondary hover:text-primary transition-colors">
-                  <Phone className="h-6 w-6" />
-                  <div>
-                    <p className="font-semibold text-sm">Teléfono</p>
-                    <p className="text-sm">+56 9 2583 5836</p>
-                  </div>
-                </a>
                 <a href="tel:+56925835616" className="flex items-center gap-3 text-secondary hover:text-primary transition-colors">
                   <Phone className="h-6 w-6" />
                   <div>
