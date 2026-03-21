@@ -7,7 +7,7 @@ import { AuthProvider } from "@/hooks/useAuth";
 import { EditModeProvider } from "@/contexts/EditModeContext";
 import { AnimatePresence, motion } from "framer-motion";
 import AdminToolbar from "@/components/admin/AdminToolbar";
-import WhatsAppButton from "@/components/WhatsAppButton";
+
 import BackToTop from "@/components/BackToTop";
 import Index from "./pages/Index.tsx";
 import Nosotros from "./pages/Nosotros.tsx";
@@ -56,7 +56,7 @@ const App = () => (
           <EditModeProvider>
             <AdminToolbar />
             <AnimatedRoutes />
-            <WhatsAppButton />
+            
             <BackToTop />
           </EditModeProvider>
         </BrowserRouter>
