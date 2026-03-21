@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Droplets, CheckCircle } from "lucide-react";
+import { CheckCircle } from "lucide-react";
+import logo from "@/assets/logo.png";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
