@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTABanner from "@/components/CTABanner";
+import AnimatedCounter from "@/components/AnimatedCounter";
 import EditableText from "@/components/admin/EditableText";
 import { useEditMode } from "@/contexts/EditModeContext";
 import logo from "@/assets/logo.png";
@@ -49,12 +50,12 @@ const Condominios = () => {
     <div className={isEditMode ? "pt-14" : ""}>
       <Navbar />
 
-      {/* Hero */}
+      {/* Hero — with stat bar inside */}
       <motion.section ref={heroRef} className="relative overflow-hidden min-h-[500px] md:min-h-[600px]" style={{ background: "linear-gradient(135deg, hsl(195, 60%, 25%) 0%, hsl(190, 50%, 35%) 50%, hsl(185, 55%, 50%) 100%)" }}>
         <motion.div className="absolute top-16 right-16 w-72 h-72 rounded-full opacity-10" style={{ background: "radial-gradient(circle, hsl(190, 60%, 50%), transparent)" }} animate={{ y: [0, -20, 0], scale: [1, 1.05, 1] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} />
         <motion.div className="absolute bottom-20 left-10 w-48 h-48 rounded-full opacity-[0.07]" style={{ background: "radial-gradient(circle, hsl(180, 50%, 60%), transparent)" }} animate={{ y: [0, 15, 0], x: [0, 10, 0] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }} />
 
-        <motion.div style={{ y: heroY, opacity: heroOpacity }} className="container mx-auto px-4 py-20 md:py-28 relative z-10">
+        <motion.div style={{ y: heroY, opacity: heroOpacity }} className="container mx-auto px-4 py-20 md:py-24 relative z-10">
           <div className="max-w-3xl">
             <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2, duration: 0.6 }}>
               <EditableText contentKey="condominios__hero__subtitle" defaultValue="Soluciones para Comunidades" as="p" className="text-primary-foreground/60 text-xs tracking-widest mb-3 uppercase" />
@@ -65,13 +66,32 @@ const Condominios = () => {
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.6 }}>
               <EditableText contentKey="condominios__hero__description" defaultValue="Nos encargamos de tus calderas, bombas y sistemas de agua para que ahorres en reparaciones y mantenciones" as="p" className="text-primary-foreground/70 text-sm tracking-wide mb-8" multiline />
             </motion.div>
-            <motion.div className="flex flex-col sm:flex-row gap-3" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.6 }}>
+            <motion.div className="flex flex-col sm:flex-row gap-3 mb-10" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.6 }}>
               <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold px-6 hover:scale-105 transition-transform">
                 <Link to="/contacto">Solicita una Cotización Gratuita <ArrowRight className="ml-2 h-4 w-4" /></Link>
               </Button>
               <Button asChild className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold px-6 hover:scale-105 transition-transform">
                 <Link to="/contacto">Conversemos</Link>
               </Button>
+            </motion.div>
+
+            {/* Stat bar */}
+            <motion.div
+              className="grid grid-cols-3 gap-4 bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/20 rounded-xl p-5"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1, duration: 0.6 }}
+            >
+              {[
+                { value: "20", suffix: "%", label: "Ahorro en gas" },
+                { value: "2", suffix: "h", label: "Tiempo de respuesta" },
+                { value: "24/7", suffix: "", label: "Soporte continuo" },
+              ].map((stat) => (
+                <div key={stat.label} className="text-center">
+                  <span className="font-display text-2xl md:text-3xl font-bold text-primary-foreground">{stat.value}<span className="text-primary-foreground/60">{stat.suffix}</span></span>
+                  <p className="text-[10px] text-primary-foreground/50 mt-1 uppercase tracking-wider">{stat.label}</p>
+                </div>
+              ))}
             </motion.div>
           </div>
         </motion.div>
@@ -103,7 +123,7 @@ const Condominios = () => {
       </section>
 
       {/* Solutions */}
-      <section className="relative" style={{ background: "linear-gradient(135deg, hsl(195, 60%, 25%) 0%, hsl(190, 50%, 35%) 50%, hsl(185, 55%, 50%) 100%)" }}>
+      <section className="relative grain-texture" style={{ background: "linear-gradient(135deg, hsl(195, 60%, 25%) 0%, hsl(190, 50%, 35%) 50%, hsl(185, 55%, 50%) 100%)" }}>
         <div className="absolute top-0 left-0 right-0">
           <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-8 md:h-14" preserveAspectRatio="none">
             <path d="M0 30C360 60 720 0 1080 30C1260 50 1440 30 1440 30V0H0V30Z" className="fill-background" />
@@ -152,7 +172,7 @@ const Condominios = () => {
             <div className="grid md:grid-cols-2 gap-10">
               {cases.map((c, i) => (
                 <motion.div key={c.name} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={i === 0 ? slideInLeft : slideInRight} whileHover={{ y: -6 }} className="cursor-default">
-                  <div className="text-center p-6 rounded-xl bg-background/50 backdrop-blur-sm border border-border/50 hover:border-primary/30 hover:shadow-lg transition-all duration-300">
+                  <div className="text-center p-6 rounded-xl glass-card hover:border-primary/30 hover:shadow-lg transition-all duration-300">
                     <p className="text-primary font-semibold text-sm mb-4">{c.name}</p>
                     <motion.div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4" whileHover={{ scale: 1.15 }}>
                       <c.icon className="h-7 w-7 text-primary" />

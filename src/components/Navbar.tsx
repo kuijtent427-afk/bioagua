@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
 
 const navLinks = [
@@ -14,11 +15,24 @@ const navLinks = [
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border shadow-sm">
-      <div className="container mx-auto flex items-center justify-between h-16 px-4">
+    <nav
+      className={`sticky top-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-background/95 backdrop-blur-md border-b border-border shadow-md"
+          : "bg-background/70 backdrop-blur-sm border-b border-transparent"
+      }`}
+    >
+      <div className="container mx-auto flex items-center justify-between h-18 px-4 py-2">
         <Link to="/" className="flex items-center gap-2">
           <img src={logo} alt="BioAgua Chile" className="h-12 w-auto" />
         </Link>
@@ -43,6 +57,9 @@ const Navbar = () => {
               )}
             </Link>
           ))}
+          <Button asChild size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold text-xs px-5 ml-2 hover:scale-105 transition-transform">
+            <Link to="/contacto">Contáctanos</Link>
+          </Button>
         </div>
 
         {/* Mobile toggle */}
@@ -80,6 +97,16 @@ const Navbar = () => {
                   </Link>
                 </motion.div>
               ))}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: navLinks.length * 0.05, duration: 0.3 }}
+                className="pt-3"
+              >
+                <Button asChild className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold">
+                  <Link to="/contacto" onClick={() => setOpen(false)}>Contáctanos</Link>
+                </Button>
+              </motion.div>
             </div>
           </motion.div>
         )}

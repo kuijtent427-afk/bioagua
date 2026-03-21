@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { AlertTriangle, DollarSign, Droplets, Zap, Shield, Clock, CheckCircle } from "lucide-react";
+import { AlertTriangle, DollarSign, Droplets, Zap, Shield, Clock, CheckCircle, Factory } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -56,29 +56,50 @@ const Empresas = () => {
     <div className={isEditMode ? "pt-14" : ""}>
       <Navbar />
 
-      {/* Hero */}
+      {/* Hero — diagonal split layout */}
       <motion.section ref={heroRef} className="relative overflow-hidden min-h-[500px] md:min-h-[600px]" style={{ background: "linear-gradient(135deg, hsl(195, 60%, 25%) 0%, hsl(190, 50%, 35%) 50%, hsl(185, 55%, 50%) 100%)" }}>
         <motion.div className="absolute top-16 right-16 w-72 h-72 rounded-full opacity-10" style={{ background: "radial-gradient(circle, hsl(190, 60%, 50%), transparent)" }} animate={{ y: [0, -20, 0], scale: [1, 1.05, 1] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} />
         <motion.div className="absolute bottom-20 left-10 w-48 h-48 rounded-full opacity-[0.07]" style={{ background: "radial-gradient(circle, hsl(180, 50%, 60%), transparent)" }} animate={{ y: [0, 15, 0], x: [0, 10, 0] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }} />
 
-        <motion.div style={{ y: heroY, opacity: heroOpacity }} className="container mx-auto px-4 py-20 md:py-28 relative z-10 text-center">
-          <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }}>
-            <EditableText contentKey="empresas__hero__subtitle" defaultValue="Soluciones Industriales" as="p" className="text-primary-foreground/60 text-xs tracking-widest mb-3 uppercase" />
-          </motion.div>
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.7 }}>
-            <EditableText contentKey="empresas__hero__title" defaultValue="EMPRESAS QUE BUSCAN EFICIENCIA Y SOSTENIBILIDAD" as="h1" className="font-display text-3xl md:text-5xl font-bold text-primary-foreground leading-tight mb-4 max-w-3xl mx-auto" />
-          </motion.div>
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.6 }}>
-            <EditableText contentKey="empresas__hero__description" defaultValue="Optimizamos tus procesos, cuidamos tus equipos y reducimos tus costos operativos." as="p" className="text-primary-foreground/70 text-sm mb-8 max-w-xl mx-auto" />
-          </motion.div>
-          <motion.div className="flex flex-col sm:flex-row gap-3 justify-center" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.6 }}>
-            <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold px-6 hover:scale-105 transition-transform">
-              <Link to="/contacto">Hablemos Hoy</Link>
-            </Button>
-            <Button asChild className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold px-6 hover:scale-105 transition-transform">
-              <Link to="/contacto">Cotización Gratuita</Link>
-            </Button>
-          </motion.div>
+        {/* Diagonal clip accent */}
+        <div className="absolute right-0 top-0 bottom-0 w-1/3 hidden md:block opacity-10" style={{ background: "linear-gradient(180deg, hsl(185, 55%, 50%) 0%, transparent 100%)", clipPath: "polygon(30% 0, 100% 0, 100% 100%, 0% 100%)" }} />
+
+        <motion.div style={{ y: heroY, opacity: heroOpacity }} className="container mx-auto px-4 py-20 md:py-28 relative z-10">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }}>
+                <EditableText contentKey="empresas__hero__subtitle" defaultValue="Soluciones Industriales" as="p" className="text-primary-foreground/60 text-xs tracking-widest mb-3 uppercase" />
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.7 }}>
+                <EditableText contentKey="empresas__hero__title" defaultValue="EMPRESAS QUE BUSCAN EFICIENCIA Y SOSTENIBILIDAD" as="h1" className="font-display text-3xl md:text-5xl font-bold text-primary-foreground leading-tight mb-4" />
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.6 }}>
+                <EditableText contentKey="empresas__hero__description" defaultValue="Optimizamos tus procesos, cuidamos tus equipos y reducimos tus costos operativos." as="p" className="text-primary-foreground/70 text-sm mb-8 max-w-lg" />
+              </motion.div>
+              <motion.div className="flex flex-col sm:flex-row gap-3" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.6 }}>
+                <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold px-6 hover:scale-105 transition-transform">
+                  <Link to="/contacto">Hablemos Hoy</Link>
+                </Button>
+                <Button asChild className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold px-6 hover:scale-105 transition-transform">
+                  <Link to="/contacto">Cotización Gratuita</Link>
+                </Button>
+              </motion.div>
+            </div>
+            <motion.div
+              className="hidden md:flex items-center justify-center"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.5, duration: 0.7 }}
+            >
+              <motion.div
+                className="w-40 h-40 rounded-2xl bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/20 flex items-center justify-center"
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <Factory className="h-20 w-20 text-primary-foreground/40" />
+              </motion.div>
+            </motion.div>
+          </div>
         </motion.div>
         <div className="absolute bottom-0 left-0 right-0">
           <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-10 md:h-16" preserveAspectRatio="none">
@@ -111,7 +132,7 @@ const Empresas = () => {
       </section>
 
       {/* Solutions */}
-      <section className="relative" style={{ background: "linear-gradient(135deg, hsl(195, 60%, 25%) 0%, hsl(190, 50%, 35%) 50%, hsl(185, 55%, 50%) 100%)" }}>
+      <section className="relative grain-texture" style={{ background: "linear-gradient(135deg, hsl(195, 60%, 25%) 0%, hsl(190, 50%, 35%) 50%, hsl(185, 55%, 50%) 100%)" }}>
         <div className="absolute top-0 left-0 right-0">
           <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-8 md:h-14" preserveAspectRatio="none">
             <path d="M0 30C360 60 720 0 1080 30C1260 50 1440 30 1440 30V0H0V30Z" className="fill-background" />

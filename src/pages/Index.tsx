@@ -7,6 +7,9 @@ import { useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTABanner from "@/components/CTABanner";
+import ClientLogos from "@/components/ClientLogos";
+import Testimonials from "@/components/Testimonials";
+import AnimatedCounter from "@/components/AnimatedCounter";
 import EditableText from "@/components/admin/EditableText";
 import { useEditMode } from "@/contexts/EditModeContext";
 import heroImage from "@/assets/hero-header.png";
@@ -56,18 +59,6 @@ const cases = [
   { name: "Comunidad Las Palmas", icon: Building, stat: "REDUCCIÓN DEL 40% EN FALLAS DE CALDERAS", desc: "Gracias a nuestras Mantenciones Preventivas." },
   { name: "Empresas XYZ", icon: Building, stat: "AHORRO DE $30 MILLONES ANUALES", desc: "En consumo energético tras la instalación de Ionizadores." },
 ];
-
-const CountUp = ({ value, suffix = "" }: { value: string; suffix?: string }) => (
-  <motion.span
-    className="font-display text-4xl md:text-5xl font-bold text-primary"
-    initial={{ opacity: 0, scale: 0.5 }}
-    whileInView={{ opacity: 1, scale: 1 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-  >
-    {value}{suffix}
-  </motion.span>
-);
 
 const Index = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -120,6 +111,9 @@ const Index = () => {
         </div>
       </motion.section>
 
+      {/* Client Trust Bar */}
+      <ClientLogos />
+
       {/* Problems */}
       <section className="bg-background py-20 md:py-28">
         <div className="container mx-auto px-4">
@@ -141,7 +135,7 @@ const Index = () => {
       </section>
 
       {/* Solutions */}
-      <section className="relative" style={{ background: "linear-gradient(135deg, hsl(195, 60%, 25%) 0%, hsl(190, 50%, 35%) 50%, hsl(185, 55%, 50%) 100%)" }}>
+      <section className="relative grain-texture" style={{ background: "linear-gradient(135deg, hsl(195, 60%, 25%) 0%, hsl(190, 50%, 35%) 50%, hsl(185, 55%, 50%) 100%)" }}>
         <div className="absolute top-0 left-0 right-0">
           <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-8 md:h-14" preserveAspectRatio="none">
             <path d="M0 30C360 60 720 0 1080 30C1260 50 1440 30 1440 30V0H0V30Z" className="fill-background" />
@@ -193,13 +187,16 @@ const Index = () => {
               { value: "11+", label: "Comunidades y Empresas\nconfían en Nosotros" },
             ].map((stat, i) => (
               <motion.div key={stat.label} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={scaleIn} className="flex flex-col items-center border-r last:border-r-0 border-border">
-                <CountUp value={stat.value} />
+                <AnimatedCounter value={stat.value} />
                 <span className="text-xs text-muted-foreground mt-2 whitespace-pre-line">{stat.label}</span>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* Testimonials */}
+      <Testimonials />
 
       {/* Cases of Success */}
       <section className="bg-light-bg py-20 md:py-28 overflow-hidden">
@@ -211,7 +208,7 @@ const Index = () => {
             <div className="grid md:grid-cols-2 gap-10">
               {cases.map((c, i) => (
                 <motion.div key={c.name} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={i === 0 ? slideInLeft : slideInRight} whileHover={{ y: -6 }} className="cursor-default">
-                  <div className="text-center p-6 rounded-xl bg-background/50 backdrop-blur-sm border border-border/50 hover:border-primary/30 hover:shadow-lg transition-all duration-300">
+                  <div className="text-center p-6 rounded-xl glass-card hover:border-primary/30 hover:shadow-lg transition-all duration-300">
                     <p className="text-primary font-semibold text-sm mb-4">{c.name}</p>
                     <motion.div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4" whileHover={{ scale: 1.15 }}>
                       <c.icon className="h-7 w-7 text-primary" />
