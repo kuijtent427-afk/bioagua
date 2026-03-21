@@ -37,28 +37,28 @@ const Index = () => {
       <Navbar />
 
       {/* Hero */}
-      <section className="relative overflow-hidden min-h-[500px] md:min-h-[600px]">
-        <div className="absolute inset-0">
-          <img src={heroImage} alt="" className="w-full h-full object-cover object-center" aria-hidden="true" />
-          <div className="absolute inset-0 bg-gradient-to-r from-secondary/90 via-secondary/70 to-transparent" />
+      <section className="relative overflow-hidden min-h-[500px] md:min-h-[600px]" style={{ background: "linear-gradient(135deg, hsl(195, 50%, 88%) 0%, hsl(195, 40%, 92%) 100%)" }}>
+        <div className="absolute inset-0 flex items-center justify-end pr-8 md:pr-16">
+          <img src={heroImage} alt="" className="max-h-[70%] w-auto object-contain" aria-hidden="true" />
         </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[hsl(195,50%,88%)] via-[hsl(195,50%,88%)]/80 to-transparent" />
         <div className="container mx-auto px-4 py-20 md:py-28 relative z-10">
           <div className="max-w-xl">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-              <p className="text-primary-foreground/60 text-xs tracking-widest mb-3 uppercase">
+              <p className="text-muted-foreground text-xs tracking-widest mb-3 uppercase">
                 Tu solución para agua limpia y sistemas eficientes
               </p>
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground leading-tight mb-4">
-                BIOAGUA <span className="font-light">CHILE</span>
+              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-secondary leading-tight mb-4">
+                BIOAGUA <span className="font-light text-foreground">CHILE</span>
               </h1>
-              <p className="text-primary-foreground/80 mb-8 max-w-lg">
+              <p className="text-muted-foreground mb-8 max-w-lg">
                 Desde mantenciones hasta instalaciones, optimizamos tus sistemas para que ahorres tiempo, dinero y recursos.
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
-                <Button asChild className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold px-6 rounded-md">
+                <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold px-6 rounded-md">
                   <Link to="/contacto">Contáctanos Hoy</Link>
                 </Button>
-                <Button asChild variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 font-semibold px-6 rounded-md">
+                <Button asChild className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold px-6 rounded-md">
                   <Link to="/contacto">Solicita una Cotización</Link>
                 </Button>
               </div>
