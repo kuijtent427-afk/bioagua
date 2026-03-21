@@ -33,30 +33,42 @@ const trustBadges = [
 const Contacto = () => {
   const { toast } = useToast();
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [clientType, setClientType] = useState("");
   const { isEditMode } = useEditMode();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (submitting) return;
+    setSubmitting(true);
+    
     const form = e.currentTarget;
     const formData = new FormData(form);
 
-    const { error } = await supabase.from("contact_messages").insert({
-      name: formData.get("name") as string,
-      email: formData.get("email") as string,
-      phone: (formData.get("phone") as string) || null,
-      client_type: clientType || null,
-      subject: (formData.get("subject") as string) || null,
-      message: formData.get("message") as string,
-    });
+    try {
+      const { error } = await supabase.from("contact_messages").insert({
+        name: formData.get("name") as string,
+        email: formData.get("email") as string,
+        phone: (formData.get("phone") as string) || null,
+        client_type: clientType || null,
+        subject: (formData.get("subject") as string) || null,
+        message: formData.get("message") as string,
+      });
 
-    if (error) {
+      if (error) {
+        console.error("Supabase insert error:", error);
+        toast({ title: "Error al enviar", description: "Intenta nuevamente.", variant: "destructive" });
+        setSubmitting(false);
+        return;
+      }
+
+      setSubmitted(true);
+      toast({ title: "¡Solicitud enviada!", description: "Nos pondremos en contacto contigo en menos de 24 horas." });
+    } catch (err) {
+      console.error("Submit error:", err);
       toast({ title: "Error al enviar", description: "Intenta nuevamente.", variant: "destructive" });
-      return;
+      setSubmitting(false);
     }
-
-    setSubmitted(true);
-    toast({ title: "¡Solicitud enviada!", description: "Nos pondremos en contacto contigo en menos de 24 horas." });
   };
 
   return (
