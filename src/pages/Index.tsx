@@ -102,12 +102,6 @@ const Index = () => {
           animate={{ y: [0, -20, 0], scale: [1, 1.05, 1] }}
           transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         />
-        <motion.div
-          className="absolute bottom-32 left-10 w-40 h-40 rounded-full opacity-10"
-          style={{ background: "radial-gradient(circle, hsl(195, 50%, 40%), transparent)" }}
-          animate={{ y: [0, 15, 0], scale: [1, 1.08, 1] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        />
 
         <motion.div style={{ y: heroY, opacity: heroOpacity }} className="container mx-auto px-4 py-20 md:py-28 relative z-10">
           <div className="max-w-xl">
