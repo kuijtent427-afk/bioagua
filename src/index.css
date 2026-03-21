@@ -93,6 +93,13 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
   * {
     @apply border-border;
   }
@@ -108,6 +115,15 @@
 }
 
 @layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(190, 55%, 40%), hsl(185, 65%, 45%), hsl(180, 60%, 50%));
+  }
+
+  .section-padding {
+    @apply py-20 md:py-28;
+  }
+
   .grain-texture {
     position: relative;
   }
@@ -123,10 +139,34 @@
   }
 
   .glass-card {
-    @apply bg-background/60 backdrop-blur-md border border-border/50;
+    @apply bg-background/60 backdrop-blur-md border border-border/50 shadow-sm;
   }
 
   .glass-card-strong {
-    @apply bg-background/40 backdrop-blur-xl border border-primary/10;
+    @apply bg-background/40 backdrop-blur-xl border border-primary/10 shadow-md;
+  }
+
+  .gradient-border-hover {
+    position: relative;
+  }
+  .gradient-border-hover::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12%;
+    bottom: 12%;
+    width: 3px;
+    border-radius: 9999px;
+    background: linear-gradient(180deg, hsl(190, 55%, 40%), hsl(185, 65%, 45%));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .gradient-border-hover:hover::before {
+    opacity: 1;
+  }
+
+  .dot-pattern {
+    background-image: radial-gradient(circle, hsl(0, 0%, 100%) 1px, transparent 1px);
+    background-size: 24px 24px;
   }
 }
