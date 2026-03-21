@@ -37,7 +37,7 @@ const Index = () => {
       <Navbar />
 
       {/* Hero */}
-      <section className="relative overflow-hidden min-h-[500px] md:min-h-[600px]" style={{ background: "linear-gradient(135deg, hsl(195, 50%, 88%) 0%, hsl(195, 40%, 92%) 100%)" }}>
+      <section className="relative overflow-hidden min-h-[500px] md:min-h-[600px]" style={{ background: "linear-gradient(135deg, hsl(195, 55%, 85%) 0%, hsl(190, 50%, 78%) 50%, hsl(185, 55%, 72%) 100%)" }}>
         <div className="absolute inset-0 flex items-center justify-end pr-4 md:pr-12">
           <img src={heroImage} alt="" className="max-h-[90%] w-auto object-contain mix-blend-multiply" aria-hidden="true" />
         </div>
