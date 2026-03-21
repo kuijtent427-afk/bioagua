@@ -220,6 +220,7 @@ const Empresas = () => {
               className="flex flex-col items-center gap-4"
             >
               <motion.img
+                style={{ filter: "brightness(0) invert(1)" }}
                 src={logo}
                 alt="BioAgua Chile"
                 className="h-28 w-auto"
