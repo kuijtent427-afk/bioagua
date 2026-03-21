@@ -37,7 +37,7 @@ const Index = () => {
       <Navbar />
 
       {/* Hero */}
-      <section className="relative overflow-hidden min-h-[500px] md:min-h-[600px]" style={{ background: "linear-gradient(135deg, hsl(195, 55%, 85%) 0%, hsl(190, 50%, 78%) 50%, hsl(185, 55%, 72%) 100%)" }}>
+      <section className="relative overflow-hidden min-h-[500px] md:min-h-[600px]" style={{ background: "linear-gradient(135deg, hsl(195, 60%, 88%) 0%, hsl(190, 55%, 78%) 30%, hsl(185, 50%, 68%) 60%, hsl(180, 45%, 62%) 100%)" }}>
         
         <div className="container mx-auto px-4 py-20 md:py-28 relative z-10">
           <div className="max-w-xl">
@@ -50,10 +50,8 @@ const Index = () => {
               >
                 Tu solución para agua limpia y sistemas eficientes
               </motion.p>
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">
-                <span className="bg-gradient-to-r from-secondary via-primary to-[hsl(185,55%,45%)] bg-clip-text text-transparent">BIOAGUA</span>
-                {" "}
-                <span className="font-light bg-gradient-to-r from-[hsl(185,55%,45%)] to-secondary bg-clip-text text-transparent">CHILE</span>
+              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-secondary leading-tight mb-4">
+                BIOAGUA <span className="font-light text-foreground">CHILE</span>
               </h1>
               <p className="text-secondary/70 mb-8 max-w-lg">
                 Desde mantenciones hasta instalaciones, optimizamos tus sistemas para que ahorres tiempo, dinero y recursos.
