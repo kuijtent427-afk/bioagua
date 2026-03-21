@@ -20,7 +20,7 @@ const Navbar = () => {
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border shadow-sm">
       <div className="container mx-auto flex items-center justify-between h-16 px-4">
         <Link to="/" className="flex items-center gap-2">
-          <img src={logo} alt="BioAgua Chile" className="h-10 w-auto" />
+          <img src={logo} alt="BioAgua Chile" className="h-12 w-auto" />
         </Link>
 
         {/* Desktop */}

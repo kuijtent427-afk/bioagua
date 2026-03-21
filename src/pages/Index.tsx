@@ -119,7 +119,7 @@ const Index = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             >
-              BIOAGUA <span className="font-light text-foreground">CHILE</span>
+              BIOAGUA
             </motion.h1>
             <motion.p
               className="text-secondary/70 mb-8 max-w-lg"
