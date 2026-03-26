@@ -39,7 +39,7 @@ export const EditModeProvider = ({ children }: { children: React.ReactNode }) =>
           setOriginalMap(map);
         }
       });
-  }, [isEditMode]);
+  }, []);
 
   const updateContent = useCallback((key: string, value: string) => {
     setContentMap((prev) => ({ ...prev, [key]: value }));
