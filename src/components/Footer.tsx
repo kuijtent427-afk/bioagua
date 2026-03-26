@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Phone, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 import logo from "@/assets/logo.png";
+import EditableText from "@/components/admin/EditableText";
 
 const staggerContainer = {
   hidden: {},
