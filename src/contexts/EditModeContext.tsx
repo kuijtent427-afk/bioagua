@@ -24,9 +24,8 @@ export const EditModeProvider = ({ children }: { children: React.ReactNode }) =>
   const [saving, setSaving] = useState(false);
   const { toast } = useToast();
 
-  // Load content from DB
+  // Load content from DB for all visitors (so saved edits appear on live site)
   useEffect(() => {
-    if (!isEditMode) return;
     supabase
       .from("site_content")
       .select("*")
