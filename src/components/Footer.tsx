@@ -77,10 +77,12 @@ const Footer = () => (
           <h4 className="font-display font-semibold mb-5 text-sm tracking-widest text-secondary-foreground/80">CONTACTO</h4>
           <div className="flex flex-col gap-3 text-sm text-secondary-foreground/50">
             <motion.a href="tel:+56925835616" className="flex items-center gap-3 hover:text-accent transition-colors" whileHover={{ x: 4, transition: { duration: 0.2 } }}>
-              <Phone className="h-4 w-4 text-accent/60" /> +56 9 2583 5616
+              <Phone className="h-4 w-4 text-accent/60" />
+              <EditableText contentKey="footer__contacto__phone" defaultValue="+56 9 2583 5616" as="span" />
             </motion.a>
             <motion.a href="mailto:bioagua@gmail.com" className="flex items-center gap-3 hover:text-accent transition-colors" whileHover={{ x: 4, transition: { duration: 0.2 } }}>
-              <Mail className="h-4 w-4 text-accent/60" /> bioagua@gmail.com
+              <Mail className="h-4 w-4 text-accent/60" />
+              <EditableText contentKey="footer__contacto__email" defaultValue="bioagua@gmail.com" as="span" />
             </motion.a>
           </div>
         </motion.div>
